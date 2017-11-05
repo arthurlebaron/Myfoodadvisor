@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "424679268513",
+    "firebase_url": "https://myfoodadvisor-45227.firebaseio.com",
+    "project_id": "myfoodadvisor-45227",
+    "storage_bucket": "myfoodadvisor-45227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424679268513:android:955d8d564d0fc141",
+        "android_client_info": {
+          "package_name": "com.myfoodadvisor.myfoodadvisor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424679268513-4eainsig3ngbhfnbrlj3478gs7lcn4e2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myfoodadvisor.myfoodadvisor",
+            "certificate_hash": "f4e28dc032452699f33db8c1411686e31cc3d805"
+          }
+        },
+        {
+          "client_id": "424679268513-h7sop02kdqdbrfn080ne13rd3agb7c7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY0gN0bgjB5qqQOCghk91l8oB-Pvpv8ZU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424679268513-h7sop02kdqdbrfn080ne13rd3agb7c7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
