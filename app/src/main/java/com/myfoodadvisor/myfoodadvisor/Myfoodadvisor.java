@@ -18,8 +18,9 @@ public class Myfoodadvisor extends AppCompatActivity {
     LoginButton loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        FacebookSdk.setApplicationId("297204487433924");
         FacebookSdk.sdkInitialize(getApplicationContext());
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myfoodadvisor);
 
         callbackManager = CallbackManager.Factory.create();
