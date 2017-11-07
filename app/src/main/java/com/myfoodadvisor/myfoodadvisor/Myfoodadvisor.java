@@ -34,7 +34,7 @@ public class Myfoodadvisor extends AppCompatActivity {
                 String id = loginResult.getAccessToken().getUserId();
                 Profile profile = Profile.getCurrentProfile();
 
-                Intent i = new Intent(Myfoodadvisor.this, mon_profil.class);
+                Intent i = new Intent(Myfoodadvisor.this, Acceuil.class);
                 startActivity(i);
 
             }
