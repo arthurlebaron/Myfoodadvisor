@@ -13,6 +13,7 @@ import com.facebook.FacebookSdk;
 public class mon_profil extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mon_profil);
 
