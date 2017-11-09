@@ -22,7 +22,9 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -67,17 +69,13 @@ public class Myfoodadvisor extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
-
+        loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // Connection réussi
-                String id = loginResult.getAccessToken().getUserId();
-                Profile profile = Profile.getCurrentProfile();
-
-                Intent i = new Intent(Myfoodadvisor.this, Acceuil.class);
-                startActivity(i);
-
+                //String id = loginResult.getAccessToken().getUserId();
+                handleFacebookAccessToken(loginResult.getAccessToken());
             }
             @Override
             public void onCancel() {
@@ -121,6 +119,57 @@ public class Myfoodadvisor extends AppCompatActivity {
 
 
     }
+
+    // [START auth_with_facebook]
+    private void handleFacebookAccessToken(AccessToken token) {
+        //Log.d(TAG, "handleFacebookAccessToken:" + token);
+        // [START_EXCLUDE silent]
+       // showProgressDialog();
+        // [END_EXCLUDE]
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Profile profile = Profile.getCurrentProfile();
+                            String username = profile.getFirstName() + profile.getLastName();
+                            mRef.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue()!= null){
+                                        Intent i = new Intent(Myfoodadvisor.this, Acceuil.class);
+                                        startActivity(i);
+                                    }else{
+                                        Intent i = new Intent(Myfoodadvisor.this, creationfacebook.class);
+                                        startActivity(i);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                           // Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(Myfoodadvisor.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // [START_EXCLUDE]
+                       // hideProgressDialog();
+                        // [END_EXCLUDE]
+                    }
+                });
+    }
+    // [END auth_with_facebook]
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
