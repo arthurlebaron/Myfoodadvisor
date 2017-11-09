@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/f">
+    android:background="@drawable/fond2">
 
     <TextView
         android:id="@+id/Creationcompte"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Creation d'un compte"
+        android:text="Mon profil"
         android:textAppearance="@android:style/TextAppearance.WindowTitle"
         android:textSize="24sp" />
 
@@ -29,28 +29,43 @@
                 android:id="@+id/textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prenom"
+                android:text="Pseudo"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <EditText
-                android:id="@+id/prenom"
+                android:id="@+id/creerpseudo"
                 style="@android:style/Widget.Material.Light.AutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Prenom"
+                android:text="Votre pseudo"
                 android:textAlignment="viewStart" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/cardview_light_background" />
+
+            <EditText
+                android:id="@+id/creermp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Age"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <EditText
+                android:id="@+id/creerage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -61,10 +76,10 @@
                 android:layout_height="wrap_content"
                 android:text="Sexe"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <Spinner
-                android:id="@+id/sexe"
+                android:id="@+id/creersexe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -73,10 +88,10 @@
                 android:layout_height="wrap_content"
                 android:text="Taille"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <EditText
-                android:id="@+id/taille"
+                android:id="@+id/creertaille"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -87,10 +102,10 @@
                 android:layout_height="wrap_content"
                 android:text="Poids"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <EditText
-                android:id="@+id/poids"
+                android:id="@+id/creerpoids"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -101,10 +116,10 @@
                 android:layout_height="wrap_content"
                 android:text="Lieu"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <EditText
-                android:id="@+id/lieu"
+                android:id="@+id/creerlieu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -117,11 +132,19 @@
                 android:layout_height="wrap_content"
                 android:text="Regime"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <Spinner
+                android:id="@+id/creerregime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/creervalider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/alert_dark_frame"
+                android:text="Inscription" />
 
         </LinearLayout>
 

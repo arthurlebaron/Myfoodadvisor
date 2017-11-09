@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/f">
+    android:background="@drawable/fond2">
 
     <TextView
         android:id="@+id/textView"
@@ -15,7 +15,7 @@
         android:layout_marginTop="27dp"
         android:text="Connexion"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/cardview_dark_background" />
+        android:textColor="@android:color/white" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -42,8 +42,7 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/mp"
@@ -61,18 +60,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/mp"
         android:layout_centerHorizontal="true"
-        android:background="@android:drawable/progress_horizontal"
-        android:text="Valider" />
+        android:background="@android:drawable/alert_dark_frame"
+        android:text="Se connecter" />
 
     <Button
         android:id="@+id/creation"
-        style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/valider"
         android:layout_centerHorizontal="true"
         android:text="créer un compte"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="@color/cardview_dark_background" />
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>
