@@ -74,7 +74,6 @@ public class Myfoodadvisor extends AppCompatActivity {
                 // Connection réussi
                 String id = loginResult.getAccessToken().getUserId();
                 Profile profile = Profile.getCurrentProfile();
-                profile.
 
                 Intent i = new Intent(Myfoodadvisor.this, Acceuil.class);
                 startActivity(i);
