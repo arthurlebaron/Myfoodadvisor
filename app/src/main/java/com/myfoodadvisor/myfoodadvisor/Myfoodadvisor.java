@@ -140,6 +140,10 @@ public class Myfoodadvisor extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.getValue()!= null){
+                                        Profile profile = Profile.getCurrentProfile();
+                                        String username = profile.getFirstName() + profile.getLastName();
+                                        prefs.edit().putString("Pseudo/email", username).apply();
+                                        prefs.edit().putString("facebook", "1").apply();
                                         Intent i = new Intent(Myfoodadvisor.this, Acceuil.class);
                                         startActivity(i);
                                     }else{

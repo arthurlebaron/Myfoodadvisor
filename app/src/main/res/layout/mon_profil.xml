@@ -1,129 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/f">
+    android:layout_height="wrap_content"
+    android:background="@drawable/fond2">
 
-    <TextView
-        android:id="@+id/Creationcompte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Mon profil"
-        android:textAppearance="@android:style/TextAppearance.WindowTitle"
-        android:textSize="24sp" />
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/Creationcompte">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="200dp"
+            app:cardBackgroundColor="@color/common_google_signin_btn_text_light_default">
 
-            <TextView
-                android:id="@+id/textview"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <TextView
+                    android:id="@+id/creationcompte3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Mon profil"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.WindowTitle"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/profimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="92dp"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+                <TextView
+                    android:id="@+id/profpseudo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pseudo"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pseudo"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                android:orientation="vertical"
+                android:visibility="visible">
 
-            <EditText
-                android:id="@+id/prenom"
-                style="@android:style/Widget.Material.Light.AutoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Votre pseudo"
-                android:textAlignment="viewStart" />
+                <android.support.v7.widget.CardView
+                    android:id="@+id/modifage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignTop="@+id/textInputLayout"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/cardview_shadow_end_color">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Age"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number" />
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sexe"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                        <TextView
+                            android:id="@+id/profage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <Spinner
-                android:id="@+id/sexe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:paddingVertical="10dp"
+                            android:rotation="90"
+                            app:srcCompat="@android:drawable/arrow_up_float" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Taille"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-            <EditText
-                android:id="@+id/taille"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="numberDecimal" />
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Poids"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                <android.support.v7.widget.CardView
+                    android:id="@+id/modifsexe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignTop="@+id/textInputLayout"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/cardview_shadow_end_color">
 
-            <EditText
-                android:id="@+id/poids"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="numberDecimal" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lieu"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@android:drawable/ic_menu_info_details" />
 
-            <EditText
-                android:id="@+id/lieu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Ville"
-                android:textColor="@color/cardview_dark_background" />
+                        <TextView
+                            android:id="@+id/profsexe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Regime"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/cardview_dark_background" />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:paddingVertical="10dp"
+                            android:rotation="90"
+                            app:srcCompat="@android:drawable/arrow_up_float" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    </ScrollView>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/modiftaille"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignTop="@+id/textInputLayout"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/cardview_shadow_end_color">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+                        <TextView
+                            android:id="@+id/proftaille"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:paddingVertical="10dp"
+                            android:rotation="90"
+                            app:srcCompat="@android:drawable/arrow_up_float" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/modifpoids"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignTop="@+id/textInputLayout"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/cardview_shadow_end_color">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@android:drawable/ic_menu_view" />
+
+                        <TextView
+                            android:id="@+id/profpoids"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:paddingVertical="10dp"
+                            android:rotation="90"
+                            app:srcCompat="@android:drawable/arrow_up_float" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/modiflieu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignTop="@+id/textInputLayout"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/cardview_shadow_end_color">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@android:drawable/ic_menu_mylocation" />
+
+                        <TextView
+                            android:id="@+id/proflieu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:paddingVertical="10dp"
+                            android:rotation="90"
+                            app:srcCompat="@android:drawable/arrow_up_float" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/modifregime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignTop="@+id/textInputLayout"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/cardview_shadow_end_color">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+                        <TextView
+                            android:id="@+id/profregime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            android:paddingVertical="10dp"
+                            android:rotation="90"
+                            app:srcCompat="@android:drawable/arrow_up_float" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </RelativeLayout>
