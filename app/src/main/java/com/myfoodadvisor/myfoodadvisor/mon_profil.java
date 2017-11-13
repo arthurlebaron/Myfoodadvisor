@@ -29,6 +29,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myfoodadvisor.myfoodadvisor.modification.modificationage;
+import com.myfoodadvisor.myfoodadvisor.modification.modificationlieu;
+import com.myfoodadvisor.myfoodadvisor.modification.modificationpoids;
+import com.myfoodadvisor.myfoodadvisor.modification.modificationregime;
+import com.myfoodadvisor.myfoodadvisor.modification.modificationsexe;
+import com.myfoodadvisor.myfoodadvisor.modification.modificationtaille;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -125,6 +130,42 @@ public class mon_profil extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(i);
             }
         });
+        msexe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mon_profil.this, modificationsexe.class);
+                startActivity(i);
+            }
+        });
+        mtaille.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mon_profil.this, modificationtaille.class);
+                startActivity(i);
+            }
+        });
+        mpoids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mon_profil.this, modificationpoids.class);
+                startActivity(i);
+            }
+        });
+        mlieu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mon_profil.this, modificationlieu.class);
+                startActivity(i);
+            }
+        });
+        mregime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(mon_profil.this, modificationregime.class);
+                startActivity(i);
+            }
+        });
+
 
         pseudo.setText(username);
 

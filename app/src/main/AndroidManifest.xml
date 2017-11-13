@@ -54,6 +54,21 @@
         <activity android:name=".modification.modificationage"
             android:theme="@style/AppTheme.CustomTheme">
         </activity>
+        <activity android:name=".modification.modificationsexe"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity android:name=".modification.modificationtaille"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity android:name=".modification.modificationpoids"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity android:name=".modification.modificationregime"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity android:name=".modification.modificationlieu"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
 
     </application>
 
