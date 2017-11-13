@@ -348,7 +348,18 @@
                             app:srcCompat="@android:drawable/arrow_up_float" />
 
                     </LinearLayout>
+
                 </android.support.v7.widget.CardView>
+
+                <Button
+                    android:id="@+id/plogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/alert_dark_frame"
+                    android:text="Deconnexion"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"/>
 
             </LinearLayout>
         </ScrollView>

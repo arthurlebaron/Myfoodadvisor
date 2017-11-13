@@ -125,7 +125,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Ville"
-                android:textColor="@color/cardview_dark_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <TextView
                 android:layout_width="match_parent"

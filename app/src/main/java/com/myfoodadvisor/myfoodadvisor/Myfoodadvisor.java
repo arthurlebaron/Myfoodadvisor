@@ -76,6 +76,8 @@ public class Myfoodadvisor extends AppCompatActivity {
                 // Connection réussi
                 //String id = loginResult.getAccessToken().getUserId();
                 handleFacebookAccessToken(loginResult.getAccessToken());
+                Toast.makeText(Myfoodadvisor.this, "Wait Please.",
+                        Toast.LENGTH_LONG).show();
             }
             @Override
             public void onCancel() {
@@ -140,12 +142,14 @@ public class Myfoodadvisor extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.getValue()!= null){
+
                                         Profile profile = Profile.getCurrentProfile();
                                         String username = profile.getFirstName() + profile.getLastName();
                                         prefs.edit().putString("Pseudo/email", username).apply();
                                         prefs.edit().putString("facebook", "1").apply();
-                                        Intent i = new Intent(Myfoodadvisor.this, Acceuil.class);
+                                        Intent i = new Intent(Myfoodadvisor.this, mon_profil.class);
                                         startActivity(i);
+
                                     }else{
                                         Intent i = new Intent(Myfoodadvisor.this, creationfacebook.class);
                                         startActivity(i);

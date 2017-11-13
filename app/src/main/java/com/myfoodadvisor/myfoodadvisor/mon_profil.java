@@ -13,12 +13,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.myfoodadvisor.myfoodadvisor.modification.modificationage;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -42,6 +45,7 @@ public class mon_profil extends AppCompatActivity {
     private CardView mpoids;
     private CardView mlieu;
     private CardView mregime;
+    private Button logout;
 
     private ImageView image;
 
@@ -54,6 +58,13 @@ public class mon_profil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        FacebookSdk.setApplicationId("297204487433924");
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        super.onResume();
         setContentView(R.layout.activity_monprofil);
 
         pseudo =(TextView) findViewById(R.id.profpseudo);
@@ -63,6 +74,7 @@ public class mon_profil extends AppCompatActivity {
         poids =(TextView) findViewById(R.id.profpoids);
         lieu =(TextView) findViewById(R.id.proflieu);
         regime =(TextView) findViewById(R.id.profregime);
+        logout = (Button) findViewById(R.id.plogout);
 
         mage = (CardView)findViewById(R.id.modifage);
         msexe = (CardView)findViewById(R.id.modifsexe);
@@ -80,14 +92,25 @@ public class mon_profil extends AppCompatActivity {
 
         image = (ImageView) findViewById(R.id.profimage);
         if (prefs.getString("facebook",null) != null){
-           Picasso.with(getBaseContext()).load(mAuth.getCurrentUser().getPhotoUrl().toString()).transform(new CropCircleTransformation()).into(image);
+            Picasso.with(getBaseContext()).load(mAuth.getCurrentUser().getPhotoUrl().toString()).transform(new CropCircleTransformation()).into(image);
         }
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                LoginManager.getInstance().logOut();
+                finish();
+                Intent i = new Intent(mon_profil.this, Myfoodadvisor.class);
+                startActivity(i);
+            }
+        });
 
         mage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent i = new Intent(mon_profil.this, modifage.class);
-               // startActivity(i);
+                Intent i = new Intent(mon_profil.this, modificationage.class);
+                startActivity(i);
             }
         });
 
@@ -104,6 +127,7 @@ public class mon_profil extends AppCompatActivity {
                     lieu.setText(dataSnapshot.child("lieu").getValue().toString());
                     regime.setText(dataSnapshot.child("regime").getValue().toString());
 
+
                 }
             }
 
@@ -112,8 +136,5 @@ public class mon_profil extends AppCompatActivity {
 
             }
         });
-
     }
-
-
 }
