@@ -147,7 +147,7 @@ public class Myfoodadvisor extends AppCompatActivity {
                                         String username = profile.getFirstName() + profile.getLastName();
                                         prefs.edit().putString("Pseudo/email", username).apply();
                                         prefs.edit().putString("facebook", "1").apply();
-                                        Intent i = new Intent(Myfoodadvisor.this, mon_profil.class);
+                                        Intent i = new Intent(Myfoodadvisor.this, menuSemaine.class);
                                         startActivity(i);
 
                                     }else{

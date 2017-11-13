@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class menuSemaine extends AppCompatActivity  {
+public class menuSemaine extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
 
     private FirebaseAuth mAuth;
@@ -41,9 +47,14 @@ public class menuSemaine extends AppCompatActivity  {
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        FacebookSdk.setApplicationId("297204487433924");
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_semaine);
+        setContentView(R.layout.activity_menu_semaine);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
@@ -426,4 +437,37 @@ public class menuSemaine extends AppCompatActivity  {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_accueil) {
+            Intent i = new Intent(menuSemaine.this, Acceuil.class);
+            startActivity(i);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            finish();
+
+        } else if (id == R.id.nav_menu_semaine) {
+            Intent i = new Intent(menuSemaine.this, menuSemaine.class);
+            startActivity(i);
+            finish();
+        } else if (id == R.id.nav_profil) {
+            Intent i = new Intent(menuSemaine.this, mon_profil.class);
+            startActivity(i);
+            finish();
+        } else if (id == R.id.nav_deco) {
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
+            finish();
+            Intent i = new Intent(menuSemaine.this, Myfoodadvisor.class);
+            startActivity(i);
+        } else if (id == R.id.nav_proposition) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

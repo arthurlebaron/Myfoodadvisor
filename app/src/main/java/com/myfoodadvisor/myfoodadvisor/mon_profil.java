@@ -1,10 +1,17 @@
 package com.myfoodadvisor.myfoodadvisor;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +37,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
  * Created by Utilisateur on 06/11/2017.
  */
 
-public class mon_profil extends AppCompatActivity {
+public class mon_profil extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView pseudo;
     private TextView age;
     private TextView sexe;
@@ -58,6 +65,8 @@ public class mon_profil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Override
@@ -66,6 +75,9 @@ public class mon_profil extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onResume();
         setContentView(R.layout.activity_monprofil);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         pseudo =(TextView) findViewById(R.id.profpseudo);
         age =(TextView) findViewById(R.id.profage);
@@ -136,5 +148,59 @@ public class mon_profil extends AppCompatActivity {
 
             }
         });
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_accueil) {
+            Intent i = new Intent(mon_profil.this, Acceuil.class);
+            startActivity(i);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            finish();
+
+        } else if (id == R.id.nav_menu_semaine) {
+            Intent i = new Intent(mon_profil.this, menuSemaine.class);
+            startActivity(i);
+            finish();
+        } else if (id == R.id.nav_profil) {
+            Intent i = new Intent(mon_profil.this, mon_profil.class);
+            startActivity(i);
+            finish();
+        } else if (id == R.id.nav_deco) {
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
+            finish();
+            Intent i = new Intent(mon_profil.this, Myfoodadvisor.class);
+            startActivity(i);
+        } else if (id == R.id.nav_proposition) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

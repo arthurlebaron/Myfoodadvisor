@@ -1,5 +1,6 @@
 package com.myfoodadvisor.myfoodadvisor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,18 +13,33 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * Created by Palencar on 07/11/2017.
  */
 
 public class Acceuil extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    @Override
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
+
     protected void onCreate(Bundle savedInstanceState) {
+        FacebookSdk.setApplicationId("297204487433924");
+        FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        mRef = mDatabase.getReference();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,22 +89,30 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_accueil) {
+            Intent i = new Intent(Acceuil.this, Acceuil.class);
+            startActivity(i);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_menu_semaine) {
+            Intent i = new Intent(Acceuil.this, menuSemaine.class);
+            startActivity(i);
+            finish();
+        } else if (id == R.id.nav_profil) {
+            Intent i = new Intent(Acceuil.this, mon_profil.class);
+            startActivity(i);
+            finish();
+        } else if (id == R.id.nav_deco) {
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
+            finish();
+            Intent i = new Intent(Acceuil.this, Myfoodadvisor.class);
+            startActivity(i);
+        } else if (id == R.id.nav_proposition) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+       // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
