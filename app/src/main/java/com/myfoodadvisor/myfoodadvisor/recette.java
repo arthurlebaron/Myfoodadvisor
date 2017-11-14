@@ -9,6 +9,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -18,6 +20,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 
 public class recette extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
@@ -29,6 +37,14 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
 
     private SharedPreferences prefs;
     private String recette;
+    private List<String> listIngredients = new ArrayList<>();
+    private String prix;
+
+    private TextView nomRct;
+    private TextView tps_cui;
+    private TextView tps_prep;
+
+    //private ListView ingredients;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +52,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recette);
+        setContentView(R.layout.activity_recette);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -44,17 +60,42 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
         mAuth = FirebaseAuth.getInstance();
         prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
 
-        recette = prefs.getString("Recettel",null);
+        recette = prefs.getString("Recette",null);
         mDatabase= FirebaseDatabase.getInstance();
+
+        nomRct = (TextView) findViewById(R.id.nomRecette);
+        tps_cui = (TextView) findViewById(R.id.tps_cui);
+        tps_prep = (TextView) findViewById(R.id.tps_prep);
+       // ingredients = (ListView) findViewById(R.id.Lingredients);
+
+        nomRct.setText(recette);
 
         mDatabase.getReference().child("recettes").child(recette).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null)
                 {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        if(postSnapshot.getKey()=="tps_cui")
+                        {
+                            tps_cui.setText(postSnapshot.getValue().toString());
+                        }
+                        else if(postSnapshot.getKey()=="tps_prep")
+                        {
+                            tps_prep.setText(postSnapshot.getValue().toString());
+                        }
+                        else if(postSnapshot.getKey()=="prix")
+                        {
+                            prix=postSnapshot.getValue().toString();
+                        }
+                        else
+                        {
+                            listIngredients.add(postSnapshot.getValue().toString());
+                        }
+                    }
+
 
                 }
-
             }
 
             @Override
