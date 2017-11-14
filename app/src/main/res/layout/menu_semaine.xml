@@ -77,9 +77,8 @@
 
                             <TextView
                                 android:id="@+id/textView11"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
                                 android:text="Midi :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -94,9 +93,8 @@
 
                             <TextView
                                 android:id="@+id/textView13"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Soir :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -144,9 +142,8 @@
 
                             <TextView
                                 android:id="@+id/textView14"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Midi :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -161,9 +158,8 @@
 
                             <TextView
                                 android:id="@+id/textView15"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Soir :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -213,9 +209,8 @@
 
                             <TextView
                                 android:id="@+id/textView16"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Midi :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -230,9 +225,8 @@
 
                             <TextView
                                 android:id="@+id/textView22"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Soir :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -281,9 +275,8 @@
 
                             <TextView
                                 android:id="@+id/textView23"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Midi :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -298,9 +291,8 @@
 
                             <TextView
                                 android:id="@+id/textView24"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Soir :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -348,9 +340,8 @@
 
                             <TextView
                                 android:id="@+id/textView25"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Midi :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -365,9 +356,8 @@
 
                             <TextView
                                 android:id="@+id/textView26"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Soir :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -415,9 +405,8 @@
 
                             <TextView
                                 android:id="@+id/textView28"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Midi :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -432,9 +421,8 @@
 
                             <TextView
                                 android:id="@+id/textView29"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Soir :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -482,9 +470,8 @@
 
                             <TextView
                                 android:id="@+id/textView30"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Midi :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
@@ -499,9 +486,8 @@
 
                             <TextView
                                 android:id="@+id/textView31"
-                                android:layout_width="match_parent"
+                                android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:text="Soir :"
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
