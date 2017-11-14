@@ -104,7 +104,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -152,7 +151,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -200,7 +198,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -248,7 +245,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -296,7 +292,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -344,7 +339,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView"
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
