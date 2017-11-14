@@ -88,7 +88,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
 
                             for(int i=1;i<10;i++) {
                                 String name= "ingredient"+i;
-                                Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
                                 mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child(name).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,7 +133,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
             finish();
 
         } else if (id == R.id.nav_menu_semaine) {
-            Intent i = new Intent(recette.this, recette.class);
+            Intent i = new Intent(recette.this, menuSemaine.class);
             startActivity(i);
             finish();
         } else if (id == R.id.nav_profil) {
