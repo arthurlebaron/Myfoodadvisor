@@ -71,7 +71,7 @@ public class modificationsexe extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         String username = prefs.getString("Pseudo/email", null);
-        if (Sexe.getSelectedItem().toString().length() != 0){
+        if (Sexe.getSelectedItem().toString() != "Faire un choix"){
             mRef.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
