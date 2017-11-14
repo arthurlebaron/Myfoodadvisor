@@ -63,335 +63,32 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
         mDatabase= FirebaseDatabase.getInstance();
 
         menus[0] = (TextView) findViewById(R.id.menuLundi);
-        menus[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[0].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[0].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[0].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
 
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-        });
         menus[1] = (TextView) findViewById(R.id.menuLundi2);
-        menus[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[1].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[1].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[1].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
 
-            }
-        });
         menus[2] = (TextView) findViewById(R.id.menuMardi);
-        menus[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[2].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[2].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[2].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
 
-            }
-        });
         menus[3] = (TextView) findViewById(R.id.menuMardi2);
-        menus[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[3].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[3].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[3].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-        });
 
         menus[4] = (TextView) findViewById(R.id.menuMerc);
-        menus[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[4].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[4].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[4].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
 
-            }
-        });
         menus[5] = (TextView) findViewById(R.id.menuMerc2);
-        menus[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[5].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[5].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[5].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-        });
 
         menus[6] = (TextView) findViewById(R.id.menuJeudi);
-        menus[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[6].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[6].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[6].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
 
-            }
-        });
         menus[7] = (TextView) findViewById(R.id.menuJeudi2);
-        menus[7].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[7].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[7].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[7].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-        });
 
         menus[8] = (TextView) findViewById(R.id.menuVendr);
-        menus[8].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[8].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[8].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[8].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
 
-            }
-        });
         menus[9] = (TextView) findViewById(R.id.menuVendr2);
-        menus[9].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[9].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[9].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[9].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-        });
 
         menus[10] = (TextView) findViewById(R.id.menuSam);
-        menus[10].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[10].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[10].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[10].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
 
-            }
-        });
         menus[11] = (TextView) findViewById(R.id.menuSam2);
-        menus[11].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[11].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[11].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[11].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-        });
 
         menus[12] = (TextView) findViewById(R.id.menuDim);
-        menus[12].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[12].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[12].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[12].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
 
-            }
-        });
         menus[13] = (TextView) findViewById(R.id.menuDim2);
-        menus[13].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDatabase.getReference().child("recettes").child(menus[13].getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot==null | dataSnapshot.getValue()==null)
-                            Toast.makeText(getApplicationContext(),"Pas encore de recette pour celle ci", Toast.LENGTH_LONG).show();
-                        else {
-                            prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                            prefs.edit().putString("Recette", menus[13].getText().toString()).apply();
-                            Toast.makeText(getApplicationContext(), "Chargement recette" + menus[13].getText().toString(), Toast.LENGTH_LONG).show();
-                            //Ajouter le chargement de la nouvelle View
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-        });
-
-
 
         mDatabase.getReference().child("users").child(pseudo).child("regime").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -421,6 +118,39 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
                                 {
                                     menu.setText("Plus de recette");
                                 }
+                            }
+
+                            for( TextView menu  : menus)
+                            {
+                                final String menuName=menu.getText().toString();
+                                 menu.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mDatabase.getReference().child("recettes").child(menuName).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if(dataSnapshot==null | dataSnapshot.getValue()==null) {
+                                                    Toast.makeText(getApplicationContext(), "Chargement recette"+dataSnapshot.toString(), Toast.LENGTH_LONG).show();
+                                                }
+                                                else {
+                                                    prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
+                                                    prefs.edit().putString("Recette", menuName).apply();
+                                                    Toast.makeText(getApplicationContext(), "Chargement recette", Toast.LENGTH_LONG).show();
+
+                                                    Intent i = new Intent(menuSemaine.this, recette.class);
+                                                    startActivity(i);
+                                                    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                                                    finish();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         }
                         @Override

@@ -9,8 +9,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -21,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -44,7 +47,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
     private TextView tps_cui;
     private TextView tps_prep;
 
-    //private ListView ingredients;
+    private ListView ingredients;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,35 +69,47 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
         nomRct = (TextView) findViewById(R.id.nomRecette);
         tps_cui = (TextView) findViewById(R.id.tps_cui);
         tps_prep = (TextView) findViewById(R.id.tps_prep);
-       // ingredients = (ListView) findViewById(R.id.Lingredients);
+        ingredients = (ListView) findViewById(R.id.Lingredients);
 
         nomRct.setText(recette);
 
-        mDatabase.getReference().child("recettes").child(recette).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.getReference().child("recettes").child(recette).child("temps_cui").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null)
                 {
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        if(postSnapshot.getKey()=="tps_cui")
-                        {
-                            tps_cui.setText(postSnapshot.getValue().toString());
-                        }
-                        else if(postSnapshot.getKey()=="tps_prep")
-                        {
-                            tps_prep.setText(postSnapshot.getValue().toString());
-                        }
-                        else if(postSnapshot.getKey()=="prix")
-                        {
-                            prix=postSnapshot.getValue().toString();
-                        }
-                        else
-                        {
-                            listIngredients.add(postSnapshot.getValue().toString());
-                        }
-                    }
+                    tps_cui.setText(dataSnapshot.getValue().toString());
 
+                    mDatabase.getReference().child("recettes").child(recette).child("temps_prep").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot != null) {
+                            tps_prep.setText(dataSnapshot.getValue().toString());
 
+                            for(int i=1;i<10;i++) {
+                                String name= "ingredient"+i;
+                                Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
+                                mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.getValue()!=null) {
+                                            listIngredients.add(dataSnapshot.getValue().toString());
+                                        }
+                                        }
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                    }
+                                });
+                            }
+                                }
+                            }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                }
+                });
+                    Toast.makeText(getApplicationContext(), listIngredients.toString(), Toast.LENGTH_LONG).show();
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(recette.this, android.R.layout.simple_list_item_1, listIngredients);
+                ingredients.setAdapter(adapter);
                 }
             }
 

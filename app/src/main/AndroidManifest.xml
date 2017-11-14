@@ -45,6 +45,9 @@
         <activity android:name=".creationfacebook">
         </activity>
 
+    <activity android:name=".recette">
+    </activity>
+
         <activity android:name=".menuSemaine">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
