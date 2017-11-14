@@ -70,6 +70,7 @@ public class mon_profil extends AppCompatActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_monprofil);
 
 
     }

@@ -70,43 +70,44 @@ public class modificationregime extends Activity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         String username = prefs.getString("Pseudo/email", null);
-        mRef.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null){
-                    String username = prefs.getString("Pseudo/email", null);
-                    String newage = dataSnapshot.child("age").getValue().toString();
-                    String sexe = dataSnapshot.child("sexe").getValue().toString();
-                    String taille = dataSnapshot.child("taille").getValue().toString();
-                    String poids = dataSnapshot.child("poids").getValue().toString();
-                    String lieu = dataSnapshot.child("lieu").getValue().toString();
-                    String regime = Regime.getSelectedItem().toString();
-                    String userId = mAuth.getCurrentUser().getUid();
-                    String password = dataSnapshot.child("mp").getValue().toString();
-                    User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime);
-                    Map<String,Object> update = new HashMap<>();
-                    update.put(username,newUser);
-                    mRef.child("users").updateChildren(update).addOnCompleteListener(modificationregime.this, new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                finish();
-                            }else {
-                                Toast.makeText(modificationregime.this, "Erreur dans la modification.",
-                                        Toast.LENGTH_SHORT).show();
+        if (Regime.getSelectedItem().toString().length() != 0){
+            mRef.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null){
+                        String username = prefs.getString("Pseudo/email", null);
+                        String newage = dataSnapshot.child("age").getValue().toString();
+                        String sexe = dataSnapshot.child("sexe").getValue().toString();
+                        String taille = dataSnapshot.child("taille").getValue().toString();
+                        String poids = dataSnapshot.child("poids").getValue().toString();
+                        String lieu = dataSnapshot.child("lieu").getValue().toString();
+                        String regime = Regime.getSelectedItem().toString();
+                        String userId = mAuth.getCurrentUser().getUid();
+                        String password = dataSnapshot.child("mp").getValue().toString();
+                        User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime);
+                        Map<String,Object> update = new HashMap<>();
+                        update.put(username,newUser);
+                        mRef.child("users").updateChildren(update).addOnCompleteListener(modificationregime.this, new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    finish();
+                                }else {
+                                    Toast.makeText(modificationregime.this, "Erreur dans la modification.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-
-
-
+                }
+            });
+        }else{
+            finish();
+        }
     }
 }
