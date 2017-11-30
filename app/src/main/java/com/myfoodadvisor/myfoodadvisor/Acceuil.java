@@ -83,7 +83,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
             Intent i = new Intent(Acceuil.this, mon_profil.class);
             startActivity(i);
             finish();
-        } else if (id == R.id.nav_deco) {
+        }  else if (id == R.id.nav_deco) {
             mAuth.signOut();
             LoginManager.getInstance().logOut();
             finish();

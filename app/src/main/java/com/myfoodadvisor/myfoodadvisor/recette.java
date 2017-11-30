@@ -146,7 +146,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
             finish();
             Intent i = new Intent(recette.this, Myfoodadvisor.class);
             startActivity(i);
-        } else if (id == R.id.nav_proposition) {
+        }  else if (id == R.id.nav_proposition) {
 
         }
 
