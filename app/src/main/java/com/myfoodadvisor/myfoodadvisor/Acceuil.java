@@ -1,6 +1,7 @@
 package com.myfoodadvisor.myfoodadvisor;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -28,12 +29,16 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
+    private SharedPreferences prefs;
 
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.setApplicationId("297204487433924");
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
+
+        prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
+        String username = prefs.getString("Pseudo/email", null);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
@@ -83,7 +88,8 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
             Intent i = new Intent(Acceuil.this, mon_profil.class);
             startActivity(i);
             finish();
-        }  else if (id == R.id.nav_deco) {
+        } else if (id == R.id.nav_deco) {
+            prefs.edit().putString("facebook", "0").apply();
             mAuth.signOut();
             LoginManager.getInstance().logOut();
             finish();

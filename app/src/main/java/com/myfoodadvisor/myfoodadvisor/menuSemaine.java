@@ -187,6 +187,7 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
             startActivity(i);
             finish();
         } else if (id == R.id.nav_deco) {
+            prefs.edit().putString("facebook", "0").apply();
             mAuth.signOut();
             LoginManager.getInstance().logOut();
             finish();

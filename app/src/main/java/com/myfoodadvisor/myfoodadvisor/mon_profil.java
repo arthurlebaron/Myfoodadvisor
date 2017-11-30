@@ -109,7 +109,7 @@ public class mon_profil extends AppCompatActivity implements NavigationView.OnNa
         String username = prefs.getString("Pseudo/email", null);
 
         image = (ImageView) findViewById(R.id.profimage);
-        if (prefs.getString("facebook",null) != null){
+        if (prefs.getString("facebook",null) == "1"){
             Picasso.with(getBaseContext()).load(mAuth.getCurrentUser().getPhotoUrl().toString()).transform(new CropCircleTransformation()).into(image);
         }
 
@@ -232,6 +232,7 @@ public class mon_profil extends AppCompatActivity implements NavigationView.OnNa
             startActivity(i);
             finish();
         } else if (id == R.id.nav_deco) {
+            prefs.edit().putString("facebook", "0").apply();
             mAuth.signOut();
             LoginManager.getInstance().logOut();
             finish();
