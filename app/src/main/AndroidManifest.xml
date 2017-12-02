@@ -2,12 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myfoodadvisor.myfoodadvisor">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <meta-data android:name="com.facebook.sdk.ApplicationId"
         android:value="297204487433924"/>
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -16,6 +24,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCpfXnsl5BHqF1HkmdVRKHYZI4_xUA9FuI" />
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -67,6 +80,9 @@
             android:theme="@style/AppTheme.CustomTheme">
         </activity>
         <activity android:name=".modification.modificationlieu"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity android:name=".MapsActivityCurrentPlace"
             android:theme="@style/AppTheme.CustomTheme">
         </activity>
 

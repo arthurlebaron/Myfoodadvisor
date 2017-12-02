@@ -105,6 +105,11 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         } else if (id == R.id.nav_proposition) {
 
         }
+        else if (id == R.id.nav_map) {
+            Intent i = new Intent(Acceuil.this, MapsActivityCurrentPlace.class);
+            startActivity(i);
+            finish();
+        }
 
        // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         //drawer.closeDrawer(GravityCompat.START);
