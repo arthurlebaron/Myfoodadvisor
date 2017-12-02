@@ -1,24 +1,25 @@
 package com.myfoodadvisor.myfoodadvisor;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
 
 
 /**
@@ -29,7 +30,9 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
+    private PendingIntent pendingIntent;
     private SharedPreferences prefs;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.setApplicationId("297204487433924");
@@ -46,7 +49,11 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        alarmMethod(0,0,11,0); //11h00 AM
+        alarmMethod(0,0,6,1); //6h00 PM
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,4 +111,17 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         return true;
     }
 
+    private void alarmMethod(int s, int m, int h, int PAM){
+        Calendar calendar = Calendar.getInstance();
+        Intent myIntent = new Intent(this , NotificationService.class);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
+
+        calendar.set(Calendar.SECOND, s);
+        calendar.set(Calendar.MINUTE, m);
+        calendar.set(Calendar.HOUR, h);
+        calendar.set(Calendar.AM_PM, PAM);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
+        Log.d("D","alarmMethod");
+    }
 }
