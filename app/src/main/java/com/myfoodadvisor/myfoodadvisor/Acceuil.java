@@ -16,8 +16,11 @@ import android.widget.Toast;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -103,7 +106,29 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
             Intent i = new Intent(Acceuil.this, Myfoodadvisor.class);
             startActivity(i);
         } else if (id == R.id.nav_proposition) {
+            String username = prefs.getString("Pseudo/email", null);
+            mRef.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null){
+                        String autho = dataSnapshot.child("authorisation").getValue().toString();
+                        if (autho.equals("oui")){
+                            Intent i = new Intent(Acceuil.this, proposition.class);
+                            startActivity(i);
+                            finish();
+                        }else if (autho.equals("non")){
+                            Intent i = new Intent(Acceuil.this, nonauth.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
         else if (id == R.id.nav_map) {
             Intent i = new Intent(Acceuil.this, MapsActivityCurrentPlace.class);

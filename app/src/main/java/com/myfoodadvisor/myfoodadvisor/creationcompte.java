@@ -101,7 +101,7 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
 
     }*/
 
-    private void registerUser(final String mail,final String password,final String Age,final String Sexe,final String Taille,final String Poids,final String Lieu,final String Regime){
+    private void registerUser(final String mail,final String password,final String Age,final String Sexe,final String Taille,final String Poids,final String Lieu,final String Regime, final String authorisation){
         // [START create_user_with_email]
         String email = mail +"@myfoodadvisor.ca";
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -114,7 +114,7 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
                             //FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             final String userId = task.getResult().getUser().getUid();
-                            User newUser = new User(mail, userId, password,Age,Sexe,Taille,Poids,Lieu,Regime);
+                            User newUser = new User(mail, userId, password,Age,Sexe,Taille,Poids,Lieu,Regime, authorisation);
                             mRef.child("users").child(mail).setValue(newUser).addOnCompleteListener(creationcompte.this, new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -196,9 +196,10 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
         String Poids = poids.getText().toString();
         String Lieu = lieu.getText().toString();
         String Regime = regime.getSelectedItem().toString();
+        String authorisation = "oui";
 
         if(!TextUtils.isEmpty(user)&& !TextUtils.isEmpty(password)&& !TextUtils.isEmpty(age.getText().toString())&& !TextUtils.isEmpty(Sexe)&& !TextUtils.isEmpty(taille.getText().toString())&& !TextUtils.isEmpty(poids.getText().toString())&& !TextUtils.isEmpty(Lieu)&& !TextUtils.isEmpty(Regime)){
-            registerUser(user,password,Age,Sexe,Taille,Poids,Lieu,Regime);
+            registerUser(user,password,Age,Sexe,Taille,Poids,Lieu,Regime,authorisation);
         }
     }
 

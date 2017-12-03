@@ -148,7 +148,33 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
             Intent i = new Intent(recette.this, Myfoodadvisor.class);
             startActivity(i);
         }  else if (id == R.id.nav_proposition) {
+            String username = prefs.getString("Pseudo/email", null);
+            mRef.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null){
+                        String autho = dataSnapshot.child("authorisation").getValue().toString();
+                        if (autho.equals("oui")){
+                            Intent i = new Intent(recette.this, proposition.class);
+                            startActivity(i);
+                            finish();
+                        }else if (autho.equals("non")){
+                            Intent i = new Intent(recette.this, nonauth.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        } else if (id == R.id.nav_map) {
+            Intent i = new Intent(recette.this, MapsActivityCurrentPlace.class);
+            startActivity(i);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

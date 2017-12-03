@@ -75,13 +75,13 @@ public class creationfacebook extends AppCompatActivity implements View.OnClickL
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regime.setAdapter(adapter2);
     }
-    private void createUser(final String Age,final String Sexe,final String Taille,final String Poids,final String Lieu,final String Regime) {
+    private void createUser(final String Age,final String Sexe,final String Taille,final String Poids,final String Lieu,final String Regime, final String authorisation) {
         if (mAuth.getCurrentUser()!= null) {
             String userId = mAuth.getCurrentUser().getUid();
             Profile profile = Profile.getCurrentProfile();
             String username = profile.getFirstName() + profile.getLastName();
             String password = "pasdemotdepasse";
-            User newUser = new User(username, userId, password, Age, Sexe, Taille, Poids, Lieu, Regime);
+            User newUser = new User(username, userId, password, Age, Sexe, Taille, Poids, Lieu, Regime, authorisation);
             mRef.child("users").child(username).setValue(newUser).addOnCompleteListener(creationfacebook.this, new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -113,9 +113,10 @@ public class creationfacebook extends AppCompatActivity implements View.OnClickL
         String Poids = poids.getText().toString();
         String Lieu = lieu.getText().toString();
         String Regime = regime.getSelectedItem().toString();
+        String authorisation = "oui";
 
         if(!TextUtils.isEmpty(age.getText().toString())&& !TextUtils.isEmpty(Sexe)&& !TextUtils.isEmpty(taille.getText().toString())&& !TextUtils.isEmpty(poids.getText().toString())&& !TextUtils.isEmpty(Lieu)&& !TextUtils.isEmpty(Regime)){
-            createUser(Age,Sexe,Taille,Poids,Lieu,Regime);
+            createUser(Age,Sexe,Taille,Poids,Lieu,Regime, authorisation);
         }
     }
 }

@@ -40,6 +40,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * An activity that displays a map showing the place at the device's current location.
@@ -82,6 +87,8 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
 
     private SharedPreferences prefs;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +107,8 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
 
         prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        mRef = mDatabase.getReference();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -127,7 +136,29 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
                     Intent i = new Intent(MapsActivityCurrentPlace.this, Myfoodadvisor.class);
                     startActivity(i);
                 } else if (id == R.id.nav_proposition) {
+                    String username = prefs.getString("Pseudo/email", null);
+                    mRef.child("users").child(username).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.getValue() != null){
+                                String autho = dataSnapshot.child("authorisation").getValue().toString();
+                                if (autho.equals("oui")){
+                                    Intent i = new Intent(MapsActivityCurrentPlace.this, proposition.class);
+                                    startActivity(i);
+                                    finish();
+                                }else if (autho.equals("non")){
+                                    Intent i = new Intent(MapsActivityCurrentPlace.this, nonauth.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 }
                 else if (id == R.id.nav_map) {
                     Intent i = new Intent(MapsActivityCurrentPlace.this, MapsActivityCurrentPlace.class);

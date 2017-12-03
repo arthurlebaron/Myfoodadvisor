@@ -14,12 +14,13 @@ public class User {
     public String poids;
     public String lieu;
     public String  regime;
+    public String authorisation;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String username, String id, String mp, String age, String sexe, String taille, String poids, String lieu, String regime) {
+    public User(String username, String id, String mp, String age, String sexe, String taille, String poids, String lieu, String regime, String authorisation) {
         this.username = username;
         this.id = id;
         this.mp = mp;
@@ -29,6 +30,7 @@ public class User {
         this.poids = poids;
         this.lieu = lieu;
         this.regime = regime;
+        this.authorisation = authorisation;
 
     }
 
@@ -57,4 +59,5 @@ public class User {
     public String getRegime(){
         return regime;
     }
+    public String getAuthorisation(){return authorisation;}
 }

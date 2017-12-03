@@ -78,8 +78,9 @@ public class modificationtaille extends Activity implements View.OnClickListener
                         String lieu = dataSnapshot.child("lieu").getValue().toString();
                         String regime = dataSnapshot.child("regime").getValue().toString();
                         String userId = mAuth.getCurrentUser().getUid();
-                        String password = dataSnapshot.child("mp").getValue().toString();;
-                        User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime);
+                        String password = dataSnapshot.child("mp").getValue().toString();
+                        String authorisation = dataSnapshot.child("authorisation").getValue().toString();
+                        User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime, authorisation);
                         Map<String,Object> update = new HashMap<>();
                         update.put(username,newUser);
                         mRef.child("users").updateChildren(update).addOnCompleteListener(modificationtaille.this, new OnCompleteListener<Void>() {

@@ -77,9 +77,10 @@ public class modificationage extends Activity implements View.OnClickListener{
                         String poids = dataSnapshot.child("poids").getValue().toString();
                         String lieu = dataSnapshot.child("lieu").getValue().toString();
                         String regime = dataSnapshot.child("regime").getValue().toString();
+                        String authorisation = dataSnapshot.child("authorisation").getValue().toString();
                         String userId = mAuth.getCurrentUser().getUid();
                         String password = "pasdemotdepasse";
-                        User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime);
+                        User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime,authorisation);
                         Map<String,Object> update = new HashMap<>();
                         update.put(username,newUser);
                         mRef.child("users").updateChildren(update).addOnCompleteListener(modificationage.this, new OnCompleteListener<Void>() {

@@ -85,6 +85,12 @@
         <activity android:name=".MapsActivityCurrentPlace"
             android:theme="@style/AppTheme.CustomTheme">
         </activity>
+        <activity android:name=".proposition"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity android:name=".nonauth"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
 
         <service
             android:name="NotificationService"

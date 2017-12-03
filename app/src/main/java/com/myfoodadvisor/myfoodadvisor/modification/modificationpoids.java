@@ -79,7 +79,8 @@ public class modificationpoids extends Activity implements View.OnClickListener{
                         String regime = dataSnapshot.child("regime").getValue().toString();
                         String userId = mAuth.getCurrentUser().getUid();
                         String password = dataSnapshot.child("mp").getValue().toString();
-                        User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime);
+                        String authorisation = dataSnapshot.child("authorisation").getValue().toString();
+                        User newUser = new User(username, userId, password, newage, sexe, taille, poids, lieu, regime, authorisation);
                         Map<String,Object> update = new HashMap<>();
                         update.put(username,newUser);
                         mRef.child("users").updateChildren(update).addOnCompleteListener(modificationpoids.this, new OnCompleteListener<Void>() {
