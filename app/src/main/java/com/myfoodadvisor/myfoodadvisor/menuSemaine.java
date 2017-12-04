@@ -42,16 +42,22 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
 
     private TextView menus[] = new TextView[14];
     private String regimeUser;
-    private List<String> listRecettes = new ArrayList<String>();
+    private List<String> Recettes = new ArrayList<String>();
+    private List<String> menuSemaine = new ArrayList<String>();
     private TextView test;
 
 
     protected void onCreate(Bundle savedInstanceState) {
-        FacebookSdk.setApplicationId("297204487433924");
-        FacebookSdk.sdkInitialize(getApplicationContext());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_semaine);
+
+    }
+
+    @Override
+    protected void onResume() {
+        FacebookSdk.setApplicationId("297204487433924");
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -90,82 +96,117 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
 
         menus[13] = (TextView) findViewById(R.id.menuDim2);
 
-        mDatabase.getReference().child("users").child(pseudo).child("regime").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue()!=null)
-                {
-                    regimeUser = dataSnapshot.getValue().toString();
-                    mDatabase.getReference().child(regimeUser).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+        menus[0].setText(prefs.getString("lundi",null));
+        menus[1].setText(prefs.getString("lundi2",null));
+        menus[2].setText(prefs.getString("mardi",null));
+        menus[3].setText(prefs.getString("mardi2",null));
+        menus[4].setText(prefs.getString("mercredi",null));
+        menus[5].setText(prefs.getString("mercredi2",null));
+        menus[6].setText(prefs.getString("jeudi",null));
+        menus[7].setText(prefs.getString("jeudi2",null));
+        menus[8].setText(prefs.getString("vendredi",null));
+        menus[9].setText(prefs.getString("vendredi2",null));
+        menus[10].setText(prefs.getString("samedi",null));
+        menus[11].setText(prefs.getString("samedi2",null));
+        menus[12].setText(prefs.getString("dimanche",null));
+        menus[13].setText(prefs.getString("dimanche2",null));
+
+        if(menus[0]==null) {
+            mDatabase.getReference().child("users").child(pseudo).child("regime").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null) {
+                        mDatabase.getReference().child(dataSnapshot.getValue().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.getValue() != null) {
+                                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                        String recette = postSnapshot.getValue().toString();
+                                        Log.d("DEBUG",recette);
+                                        Recettes.add(recette);
+                                    }
+                                    Log.d("DEBUG",dataSnapshot.toString());
+                                    Log.d("DEBUG",Recettes.toString());
+
+
+                                    for (int i = 0; i < 14; i++) {
+                                        if (Recettes.size() != 0) {
+                                            int index = (int) Math.random() * Recettes.size();
+                                            menuSemaine.add(Recettes.get(index));
+                                            Recettes.remove(index);
+                                        } else {
+                                            menuSemaine.add("Plus de recette");
+                                        }
+                                    }
+                                    prefs.edit().putString("lundi", menuSemaine.get(0)).apply();
+                                    prefs.edit().putString("lundi2", menuSemaine.get(1)).apply();
+                                    prefs.edit().putString("mardi", menuSemaine.get(2)).apply();
+                                    prefs.edit().putString("mardi2", menuSemaine.get(3)).apply();
+                                    prefs.edit().putString("mercredi", menuSemaine.get(4)).apply();
+                                    prefs.edit().putString("mercredi2", menuSemaine.get(5)).apply();
+                                    prefs.edit().putString("jeudi", menuSemaine.get(6)).apply();
+                                    prefs.edit().putString("jeudi2", menuSemaine.get(7)).apply();
+                                    prefs.edit().putString("vendredi", menuSemaine.get(8)).apply();
+                                    prefs.edit().putString("vendredi2", menuSemaine.get(9)).apply();
+                                    prefs.edit().putString("samedi", menuSemaine.get(10)).apply();
+                                    prefs.edit().putString("samedi2", menuSemaine.get(11)).apply();
+                                    prefs.edit().putString("dimanche", menuSemaine.get(12)).apply();
+                                    prefs.edit().putString("dimanche2", menuSemaine.get(13)).apply();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+
+
+        for( TextView menu  : menus)
+        {
+            final String menuName=menu.getText().toString();
+            menu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDatabase.getReference().child("recettes").child(menuName).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.getValue() != null) {
-                                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                    String recette = postSnapshot.getValue().toString();
-                                    listRecettes.add(recette);
-                                }
+                            if(dataSnapshot==null | dataSnapshot.getValue()==null) {
+                                Toast.makeText(getApplicationContext(), "Chargement recette"+dataSnapshot.toString(), Toast.LENGTH_LONG).show();
                             }
-                            for(TextView menu : menus)
-                            {
+                            else {
+                                prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
+                                prefs.edit().putString("Recette", menuName).apply();
+                                Toast.makeText(getApplicationContext(), "Chargement recette", Toast.LENGTH_LONG).show();
 
-                                if(listRecettes.size()!=0)
-                                {
-                                    int index = (int) Math.random()*listRecettes.size();
-                                    menu.setText(listRecettes.get(index));
-                                    listRecettes.remove(index);
-                                }
-                                else
-                                {
-                                    menu.setText("Plus de recette");
-                                }
-                            }
-
-                            for( TextView menu  : menus)
-                            {
-                                final String menuName=menu.getText().toString();
-                                 menu.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        mDatabase.getReference().child("recettes").child(menuName).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                if(dataSnapshot==null | dataSnapshot.getValue()==null) {
-                                                    Toast.makeText(getApplicationContext(), "Chargement recette"+dataSnapshot.toString(), Toast.LENGTH_LONG).show();
-                                                }
-                                                else {
-                                                    prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
-                                                    prefs.edit().putString("Recette", menuName).apply();
-                                                    Toast.makeText(getApplicationContext(), "Chargement recette", Toast.LENGTH_LONG).show();
-
-                                                    Intent i = new Intent(menuSemaine.this, recette.class);
-                                                    startActivity(i);
-                                                    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                                                    finish();
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-
-                                            }
-                                        });
-                                    }
-                                });
+                                Intent i = new Intent(menuSemaine.this, recette.class);
+                                startActivity(i);
+                                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                                finish();
                             }
                         }
+
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
+
                         }
                     });
                 }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
+            });
+        }
+        super.onResume();
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

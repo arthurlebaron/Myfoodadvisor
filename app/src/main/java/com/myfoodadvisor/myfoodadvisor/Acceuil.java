@@ -53,8 +53,8 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        alarmMethod(0,0,11,0); //11h00 AM
-        alarmMethod(0,0,6,1); //6h00 PM
+        //alarmMethod(0,0,11,0); //11h00 AM
+        //alarmMethod(0,0,6,1); //6h00 PM
     }
 
 

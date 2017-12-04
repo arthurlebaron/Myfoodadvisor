@@ -26,6 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myfoodadvisor.myfoodadvisor.Entities.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Utilisateur on 07/11/2017.
  */
@@ -47,6 +50,8 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
     private DatabaseReference mRef;
 
     private SharedPreferences prefs;
+    List<String> Recettes = new ArrayList<String>();
+    List<String> menuSemaine = new ArrayList<String>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +108,7 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
 
     private void registerUser(final String mail,final String password,final String Age,final String Sexe,final String Taille,final String Poids,final String Lieu,final String Regime, final String authorisation){
         // [START create_user_with_email]
+
         String email = mail +"@myfoodadvisor.ca";
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -115,11 +121,73 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
                             //updateUI(user);
                             final String userId = task.getResult().getUser().getUid();
                             User newUser = new User(mail, userId, password,Age,Sexe,Taille,Poids,Lieu,Regime, authorisation);
+
                             mRef.child("users").child(mail).setValue(newUser).addOnCompleteListener(creationcompte.this, new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         ///mRef.child("username").child(user).setValue(userId);
+
+                                        mRef.child("users").child(mail).child("regime").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if(dataSnapshot.getValue()!=null)
+                                                {
+
+                                                    mRef.child(Regime).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                            if (dataSnapshot.getValue() != null) {
+                                                                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                                                    String recette = postSnapshot.getValue().toString();
+                                                                    Recettes.add(recette);
+                                                                }
+                                                                for(int i=0;i<14;i++)
+                                                                {
+                                                                    if(Recettes.size()!=0)
+                                                                    {
+                                                                        int index = (int) Math.random()*Recettes.size();
+                                                                        menuSemaine.add(Recettes.get(index));
+                                                                        Recettes.remove(index);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        menuSemaine.add("Plus de recette");
+                                                                    }
+                                                                }
+                                                                prefs.edit().putString("lundi", menuSemaine.get(0)).apply();
+                                                                prefs.edit().putString("lundi2", menuSemaine.get(1)).apply();
+
+                                                                prefs.edit().putString("mardi", menuSemaine.get(2)).apply();
+                                                                prefs.edit().putString("mardi2", menuSemaine.get(3)).apply();
+
+                                                                prefs.edit().putString("mercredi", menuSemaine.get(4)).apply();
+                                                                prefs.edit().putString("mercredi2", menuSemaine.get(5)).apply();
+
+                                                                prefs.edit().putString("jeudi", menuSemaine.get(6)).apply();
+                                                                prefs.edit().putString("jeudi2", menuSemaine.get(7)).apply();
+
+                                                                prefs.edit().putString("vendredi", menuSemaine.get(8)).apply();
+                                                                prefs.edit().putString("vendredi2", menuSemaine.get(9)).apply();
+
+                                                                prefs.edit().putString("samedi", menuSemaine.get(10)).apply();
+                                                                prefs.edit().putString("samedi2", menuSemaine.get(11)).apply();
+
+                                                                prefs.edit().putString("dimanche", menuSemaine.get(12)).apply();
+                                                                prefs.edit().putString("dimanche2", menuSemaine.get(13)).apply();
+                                                            }
+                                                        }
+                                                        @Override
+                                                        public void onCancelled(DatabaseError databaseError) {
+                                                        }
+                                                    });
+                                            }
+                                            }
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
 
                                         prefs.edit().putString("Pseudo/email", mail).apply();
 
