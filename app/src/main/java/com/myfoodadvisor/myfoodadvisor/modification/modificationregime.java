@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.myfoodadvisor.myfoodadvisor.Entities.User;
 import com.myfoodadvisor.myfoodadvisor.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +41,12 @@ public class modificationregime extends Activity implements View.OnClickListener
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
+
+
+
+    List<String> menuSemaine = new ArrayList<String>();
+    List<String> Recettes = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,7 +84,7 @@ public class modificationregime extends Activity implements View.OnClickListener
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() != null){
-                        String username = prefs.getString("Pseudo/email", null);
+                        final String username = prefs.getString("Pseudo/email", null);
                         String newage = dataSnapshot.child("age").getValue().toString();
                         String sexe = dataSnapshot.child("sexe").getValue().toString();
                         String taille = dataSnapshot.child("taille").getValue().toString();
@@ -92,6 +101,50 @@ public class modificationregime extends Activity implements View.OnClickListener
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
+
+                                                mDatabase.getReference().child(Regime.getSelectedItem().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                        if (dataSnapshot.getValue() != null) {
+                                                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                                                String recette = postSnapshot.getValue().toString();
+                                                                Log.d("DEBUG",recette);
+                                                                Recettes.add(recette);
+                                                            }
+                                                            Log.d("DEBUG",dataSnapshot.toString());
+                                                            Log.d("DEBUG",Recettes.toString());
+
+
+                                                            for (int i = 0; i < 14; i++) {
+                                                                if (Recettes.size() != 0) {
+                                                                    int index = (int) Math.random() * Recettes.size();
+                                                                    menuSemaine.add(Recettes.get(index));
+                                                                    Recettes.remove(index);
+                                                                } else {
+                                                                    menuSemaine.add("Plus de recette");
+                                                                }
+                                                            }
+                                                            prefs.edit().putString("lundi", menuSemaine.get(0)).apply();
+                                                            prefs.edit().putString("lundi2", menuSemaine.get(1)).apply();
+                                                            prefs.edit().putString("mardi", menuSemaine.get(2)).apply();
+                                                            prefs.edit().putString("mardi2", menuSemaine.get(3)).apply();
+                                                            prefs.edit().putString("mercredi", menuSemaine.get(4)).apply();
+                                                            prefs.edit().putString("mercredi2", menuSemaine.get(5)).apply();
+                                                            prefs.edit().putString("jeudi", menuSemaine.get(6)).apply();
+                                                            prefs.edit().putString("jeudi2", menuSemaine.get(7)).apply();
+                                                            prefs.edit().putString("vendredi", menuSemaine.get(8)).apply();
+                                                            prefs.edit().putString("vendredi2", menuSemaine.get(9)).apply();
+                                                            prefs.edit().putString("samedi", menuSemaine.get(10)).apply();
+                                                            prefs.edit().putString("samedi2", menuSemaine.get(11)).apply();
+                                                            prefs.edit().putString("dimanche", menuSemaine.get(12)).apply();
+                                                            prefs.edit().putString("dimanche2", menuSemaine.get(13)).apply();
+                                                        }
+                                                    }
+                                                    @Override
+                                                    public void onCancelled(DatabaseError databaseError) {
+                                                    }
+                                                });
+
                                     finish();
                                 }else {
                                     Toast.makeText(modificationregime.this, "Erreur dans la modification.",
