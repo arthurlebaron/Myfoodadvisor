@@ -76,48 +76,84 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
         mDatabase.getReference().child("recettes").child(recette).child("temps_cui").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot!=null)
-                {
+                if (dataSnapshot != null) {
                     tps_cui.setText(dataSnapshot.getValue().toString());
 
                     mDatabase.getReference().child("recettes").child(recette).child("temps_prep").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot != null) {
-                            tps_prep.setText(dataSnapshot.getValue().toString());
+                            if (dataSnapshot != null) {
+                                tps_prep.setText(dataSnapshot.getValue().toString());
 
-                            for(int i=1;i<10;i++) {
-                                String name= "ingredient"+i;
-                                //Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
-                                mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                                mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient1").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.getValue()!=null) {
+                                        if (dataSnapshot.getValue() != null) {
+
                                             listIngredients.add(dataSnapshot.getValue().toString());
+                                            mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient2").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.getValue() != null) {
+
+                                                        listIngredients.add(dataSnapshot.getValue().toString());
+                                                        mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient3").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                if (dataSnapshot.getValue() != null) {
+
+                                                                    listIngredients.add(dataSnapshot.getValue().toString());
+                                                                    mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient4").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                            if (dataSnapshot.getValue() != null) {
+
+                                                                                listIngredients.add(dataSnapshot.getValue().toString());
+
+                                                                            }
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onCancelled(DatabaseError databaseError) {
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+                                                            }
+                                                        });
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                }
+                                            });
                                         }
-                                        }
+                                    }
+
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
                                     }
                                 });
                             }
-                                }
-                            }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                }
-                });
+                        }
+
+
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
                     Toast.makeText(getApplicationContext(), listIngredients.toString(), Toast.LENGTH_LONG).show();
-                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(recette.this, android.R.layout.simple_list_item_1, listIngredients);
-                ingredients.setAdapter(adapter);
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(recette.this, android.R.layout.simple_list_item_1, listIngredients);
+                    ingredients.setAdapter(adapter);
                 }
             }
-
-            @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
+
     }
 
 
