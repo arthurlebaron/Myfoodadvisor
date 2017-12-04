@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
@@ -21,8 +23,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 
 
 /**
@@ -35,6 +43,13 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
     private DatabaseReference mRef;
     private PendingIntent pendingIntent;
     private SharedPreferences prefs;
+    private String jour;
+    private TextView repamidi;
+    private TextView repasoir;
+    private TextView tpsprepamidi;
+    private TextView tpsprepasoir;
+    private ImageView imagemidi;
+    private ImageView imagesoir;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +65,231 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference();
 
+        repamidi =(TextView) findViewById(R.id.repamidi);
+        repasoir =(TextView) findViewById(R.id.repasoir);
+        tpsprepamidi =(TextView) findViewById(R.id.tpsprepamidi);
+        tpsprepasoir =(TextView) findViewById(R.id.tpsprepasoir);
+        imagemidi =(ImageView) findViewById(R.id.imagemidi);
+        imagesoir =(ImageView) findViewById(R.id.imagesoir);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //alarmMethod(0,0,11,0); //11h00 AM
-        //alarmMethod(0,0,6,1); //6h00 PM
+       // alarmMethod(0,0,11,0); //11h00 AM
+       // alarmMethod(0,0,6,1); //6h00 PM
+
+        GregorianCalendar calendar =new GregorianCalendar();
+        calendar.setTime(new Date());
+        int today =calendar.get(calendar.DAY_OF_WEEK);
+
+        switch (today) {
+            case GregorianCalendar.MONDAY:
+                //on est lundi
+                jour = "lund";
+                repamidi.setText(prefs.getString("lundi", "lasagne"));
+                repasoir.setText(prefs.getString("lundi2", "riz"));
+                Picasso.with(getBaseContext()).load("http://static.cuisineaz.com/400x320/i19403-lasgnes-bolognaise-facile.jpg").transform(new CropSquareTransformation()).into(imagemidi);
+                Picasso.with(getBaseContext()).load("http://img-3.journaldesfemmes.com/UmDA9mzoIohN3S1kmpaDjXxhBS0=/910x607/smart/image-cms/10425434.jpg").transform(new CropCircleTransformation()).into(imagesoir);
+
+                break;
+            case GregorianCalendar.TUESDAY:
+                //on est mardi
+                jour = "mardi";
+                repamidi.setText(prefs.getString("mardi", null));
+                repasoir.setText(prefs.getString("mardi2", null));
+                mRef.child("recettes").child(prefs.getString("mardi", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                mRef.child("recettes").child(prefs.getString("mardi2", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                break;
+            case GregorianCalendar.WEDNESDAY:
+                //on est mardi
+                jour = "mercredi";
+                repamidi.setText(prefs.getString("mercredi", null));
+                repasoir.setText(prefs.getString("mercredi2", null));
+                mRef.child("recettes").child(prefs.getString("mercredi", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                mRef.child("recettes").child(prefs.getString("mercredi2", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString()  + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                break;
+            case GregorianCalendar.THURSDAY:
+                //on est mardi
+                jour = "jeudi";
+                repamidi.setText(prefs.getString("jeudi", null));
+                repasoir.setText(prefs.getString("jeudi2", null));
+                mRef.child("recettes").child(prefs.getString("jeudi", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                mRef.child("recettes").child(prefs.getString("jeudi2", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                break;
+            case GregorianCalendar.FRIDAY:
+                //on est mardi
+                jour = "vendredi";
+                repamidi.setText(prefs.getString("vendredi", null));
+                repasoir.setText(prefs.getString("vendredi2", null));
+                mRef.child("recettes").child(prefs.getString("vendredi", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                mRef.child("recettes").child(prefs.getString("vendredi2", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                break;
+            case GregorianCalendar.SATURDAY:
+                //on est mardi
+                jour = "samedi";
+                repamidi.setText(prefs.getString("samedi", null));
+                repasoir.setText(prefs.getString("samedi2", null));
+                mRef.child("recettes").child(prefs.getString("samedi", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                mRef.child("recettes").child(prefs.getString("samedi2", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                break;
+            case GregorianCalendar.SUNDAY:
+                //on est mardi
+                jour = "dimanche";
+                repamidi.setText(prefs.getString("dimanche", null));
+                repasoir.setText(prefs.getString("dimanche2", null));
+                mRef.child("recettes").child(prefs.getString("dimanche", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                mRef.child("recettes").child(prefs.getString("dimanche2", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null){
+                            tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString()+ " min");
+                            //temps_prep:
+                            Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                break;
+            ///etc etc
+
+            default:
+                //ça devrait pas erreur
+                break;
+        }
     }
 
 
