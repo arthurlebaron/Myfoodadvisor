@@ -499,6 +499,9 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
             case "tartiflette":
                 Picasso.with(getBaseContext()).load(R.drawable.tartiflette).transform(new CropSquareTransformation()).into(image);
                 break;
+            case "fajitas":
+                Picasso.with(getBaseContext()).load(R.drawable.fajitas).transform(new CropSquareTransformation()).into(image);
+                break;
                 default:
                     Picasso.with(getBaseContext()).load(R.drawable.defaut_img).transform(new CropSquareTransformation()).into(image);
         }
