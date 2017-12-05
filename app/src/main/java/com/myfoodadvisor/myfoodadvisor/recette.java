@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import jp.wasabeef.picasso.transformations.CropSquareTransformation;
 
 
 public class recette extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
@@ -42,7 +46,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
     private String recette;
 
     private TextView nomRct,tps_cui,tps_prep,prix,ingredient1,ingredient2,ingredient3,ingredient4;
-
+    private ImageView img;
     private ListView ingredients;
 
 
@@ -66,6 +70,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
         prix = (TextView) findViewById(R.id.prix);
         tps_cui = (TextView) findViewById(R.id.tps_cui);
         tps_prep = (TextView) findViewById(R.id.tps_prep);
+        img = (ImageView) findViewById(R.id.photo_recette);
 
         ingredient1 = (TextView) findViewById(R.id.ingredient1);
         ingredient2 = (TextView) findViewById(R.id.ingredient2);
@@ -109,6 +114,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
                                                                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                                                                         if (dataSnapshot.getValue() != null) {
                                                                                             ingredient4.setText(dataSnapshot.getValue().toString());
+                                                                                            affiche_image(recette,img);
                                                                                         }
                                                                                     }
                                                                                     @Override
@@ -219,5 +225,90 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+
+
+    private void affiche_image (String nom, ImageView image){
+        switch (nom){
+            case "boeuf bourgignon":
+                Picasso.with(getBaseContext()).load(R.drawable.boeuf_bourgignon).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "boudin noir aux pommes":
+                Picasso.with(getBaseContext()).load(R.drawable.boudin_noir_aux_pommes).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "cassoulet":
+                Picasso.with(getBaseContext()).load(R.drawable.cassoulet).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "boulettes de viande":
+                Picasso.with(getBaseContext()).load(R.drawable.boulettes_de_viande).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "cordon bleu maison":
+                Picasso.with(getBaseContext()).load(R.drawable.cordon_bleu_maison).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "gratin de pates":
+                Picasso.with(getBaseContext()).load(R.drawable.gratin_de_pates).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "kebab":
+                Picasso.with(getBaseContext()).load(R.drawable.kebab).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "mcdo":
+                Picasso.with(getBaseContext()).load(R.drawable.mcdo).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "nems":
+                Picasso.with(getBaseContext()).load(R.drawable.nems).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "nouilles":
+                Picasso.with(getBaseContext()).load(R.drawable.nouilles).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "pates carbonara":
+                Picasso.with(getBaseContext()).load(R.drawable.pates_carbonara).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "pizza":
+                Picasso.with(getBaseContext()).load(R.drawable.pizza).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "poisson blanc riz":
+                Picasso.with(getBaseContext()).load(R.drawable.poisson_blanc_riz).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "poulet frites":
+                Picasso.with(getBaseContext()).load(R.drawable.poulet_frites).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "raclette":
+                Picasso.with(getBaseContext()).load(R.drawable.raclette).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "raviolis vapeur":
+                Picasso.with(getBaseContext()).load(R.drawable.raviolis_vapeur).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "risotto":
+                Picasso.with(getBaseContext()).load(R.drawable.risotto).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "riz dinde":
+                Picasso.with(getBaseContext()).load(R.drawable.riz_dinde).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "salade concombre feta":
+                Picasso.with(getBaseContext()).load(R.drawable.salade_concombre_feta).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "salade de choux":
+                Picasso.with(getBaseContext()).load(R.drawable.salade_de_choux).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "salade quinoa":
+                Picasso.with(getBaseContext()).load(R.drawable.salade_quinoa).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "sandwich club":
+                Picasso.with(getBaseContext()).load(R.drawable.sandwich_club).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "soupe minestrone":
+                Picasso.with(getBaseContext()).load(R.drawable.soupe_minestrone).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "sushi":
+                Picasso.with(getBaseContext()).load(R.drawable.sushi).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "tartiflette":
+                Picasso.with(getBaseContext()).load(R.drawable.tartiflette).transform(new CropSquareTransformation()).into(image);
+                break;
+            default:
+                Picasso.with(getBaseContext()).load(R.drawable.defaut_img).transform(new CropSquareTransformation()).into(image);
+        }
     }
 }
