@@ -135,6 +135,11 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
             startActivity(i);
             finish();
         }
+        else if (id == R.id.nav_courses) {
+            Intent i = new Intent(Acceuil.this, menuSemaine.class);
+            startActivity(i);
+            finish();
+        }
 
        // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         //drawer.closeDrawer(GravityCompat.START);

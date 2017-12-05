@@ -165,6 +165,11 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
                     startActivity(i);
                     finish();
                 }
+                else if (id == R.id.nav_courses) {
+                    Intent i = new Intent(MapsActivityCurrentPlace.this, menuSemaine.class);
+                    startActivity(i);
+                    finish();
+                }
 
                 // DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 //drawer.closeDrawer(GravityCompat.START);
@@ -290,9 +295,11 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            if(mLastKnownLocation!=null) {
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(mLastKnownLocation.getLatitude(),
+                                                mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());

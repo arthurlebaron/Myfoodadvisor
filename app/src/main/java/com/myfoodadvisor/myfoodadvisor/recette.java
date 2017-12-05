@@ -40,12 +40,8 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
 
     private SharedPreferences prefs;
     private String recette;
-    private List<String> listIngredients = new ArrayList<>();
-    private String prix;
 
-    private TextView nomRct;
-    private TextView tps_cui;
-    private TextView tps_prep;
+    private TextView nomRct,tps_cui,tps_prep,prix,ingredient1,ingredient2,ingredient3,ingredient4;
 
     private ListView ingredients;
 
@@ -63,53 +59,64 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
         mAuth = FirebaseAuth.getInstance();
         prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
 
-        recette = prefs.getString("Recette",null);
-        mDatabase= FirebaseDatabase.getInstance();
+        recette = prefs.getString("Recette", null);
+        mDatabase = FirebaseDatabase.getInstance();
 
         nomRct = (TextView) findViewById(R.id.nomRecette);
+        prix = (TextView) findViewById(R.id.prix);
         tps_cui = (TextView) findViewById(R.id.tps_cui);
         tps_prep = (TextView) findViewById(R.id.tps_prep);
-        ingredients = (ListView) findViewById(R.id.Lingredients);
+
+        ingredient1 = (TextView) findViewById(R.id.ingredient1);
+        ingredient2 = (TextView) findViewById(R.id.ingredient2);
+        ingredient3 = (TextView) findViewById(R.id.ingredient3);
+        ingredient4 = (TextView) findViewById(R.id.ingredient4);
+
 
         nomRct.setText(recette);
-
-        mDatabase.getReference().child("recettes").child(recette).child("temps_cui").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.getReference().child("recettes").child(recette).child("prix").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot != null) {
-                    tps_cui.setText(dataSnapshot.getValue().toString());
-
-                    mDatabase.getReference().child("recettes").child(recette).child("temps_prep").addListenerForSingleValueEvent(new ValueEventListener() {
+                if(dataSnapshot!=null) {
+                    prix.setText(dataSnapshot.getValue().toString());
+                    mDatabase.getReference().child("recettes").child(recette).child("temps_cui").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot != null) {
-                                tps_prep.setText(dataSnapshot.getValue().toString());
-
-                                mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient1").addListenerForSingleValueEvent(new ValueEventListener() {
+                                tps_cui.setText(dataSnapshot.getValue().toString());
+                                mDatabase.getReference().child("recettes").child(recette).child("temps_prep").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.getValue() != null) {
+                                        if (dataSnapshot != null) {
+                                            tps_prep.setText(dataSnapshot.getValue().toString());
 
-                                            listIngredients.add(dataSnapshot.getValue().toString());
-                                            mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient2").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            mDatabase.getReference().child("recettes").child(recette).child("ingredient1").addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                     if (dataSnapshot.getValue() != null) {
-
-                                                        listIngredients.add(dataSnapshot.getValue().toString());
-                                                        mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient3").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        ingredient1.setText(dataSnapshot.getValue().toString());
+                                                        mDatabase.getReference().child("recettes").child(recette).child("ingredient2").addListenerForSingleValueEvent(new ValueEventListener() {
                                                             @Override
                                                             public void onDataChange(DataSnapshot dataSnapshot) {
                                                                 if (dataSnapshot.getValue() != null) {
-
-                                                                    listIngredients.add(dataSnapshot.getValue().toString());
-                                                                    mDatabase.getReference().child("recettes").child(recette).child("ingrédients").child("ingredient4").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    ingredient2.setText(dataSnapshot.getValue().toString());
+                                                                    mDatabase.getReference().child("recettes").child(recette).child("ingredient3").addListenerForSingleValueEvent(new ValueEventListener() {
                                                                         @Override
                                                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                                                             if (dataSnapshot.getValue() != null) {
+                                                                                ingredient3.setText(dataSnapshot.getValue().toString());
+                                                                                mDatabase.getReference().child("recettes").child(recette).child("ingredient4").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                    @Override
+                                                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                        if (dataSnapshot.getValue() != null) {
+                                                                                            ingredient4.setText(dataSnapshot.getValue().toString());
+                                                                                        }
+                                                                                    }
 
-                                                                                listIngredients.add(dataSnapshot.getValue().toString());
-
+                                                                                    @Override
+                                                                                    public void onCancelled(DatabaseError databaseError) {
+                                                                                    }
+                                                                                });
                                                                             }
                                                                         }
 
@@ -141,23 +148,20 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
                             }
                         }
 
-
                         public void onCancelled(DatabaseError databaseError) {
                         }
                     });
-                    Toast.makeText(getApplicationContext(), listIngredients.toString(), Toast.LENGTH_LONG).show();
-                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(recette.this, android.R.layout.simple_list_item_1, listIngredients);
-                    ingredients.setAdapter(adapter);
                 }
             }
+
+            @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
     }
 
 
-    @Override
+            @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -209,6 +213,11 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
             });
         } else if (id == R.id.nav_map) {
             Intent i = new Intent(recette.this, MapsActivityCurrentPlace.class);
+            startActivity(i);
+            finish();
+        }
+        else if (id == R.id.nav_courses) {
+            Intent i = new Intent(recette.this, menuSemaine.class);
             startActivity(i);
             finish();
         }

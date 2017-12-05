@@ -16,22 +16,18 @@ import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.myfoodadvisor.myfoodadvisor.Entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class menuSemaine extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class coursesSemaine extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
 
     private FirebaseAuth mAuth;
@@ -68,36 +64,9 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
         String pseudo = prefs.getString("Pseudo/email",null);
         mDatabase= FirebaseDatabase.getInstance();
 
-        menus[0] = (TextView) findViewById(R.id.menuLundi);
-
-        menus[1] = (TextView) findViewById(R.id.menuLundi2);
-
-        menus[2] = (TextView) findViewById(R.id.menuMardi);
-
-        menus[3] = (TextView) findViewById(R.id.menuMardi2);
-
-        menus[4] = (TextView) findViewById(R.id.menuMerc);
-
-        menus[5] = (TextView) findViewById(R.id.menuMerc2);
-
-        menus[6] = (TextView) findViewById(R.id.menuJeudi);
-
-        menus[7] = (TextView) findViewById(R.id.menuJeudi2);
-
-        menus[8] = (TextView) findViewById(R.id.menuVendr);
-
-        menus[9] = (TextView) findViewById(R.id.menuVendr2);
-
-        menus[10] = (TextView) findViewById(R.id.menuSam);
-
-        menus[11] = (TextView) findViewById(R.id.menuSam2);
-
-        menus[12] = (TextView) findViewById(R.id.menuDim);
-
-        menus[13] = (TextView) findViewById(R.id.menuDim2);
 
 
-
+/*
         menus[0].setText(prefs.getString("lundi",null));
         menus[1].setText(prefs.getString("lundi2",null));
         menus[2].setText(prefs.getString("mardi",null));
@@ -112,6 +81,8 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
         menus[11].setText(prefs.getString("samedi2",null));
         menus[12].setText(prefs.getString("dimanche",null));
         menus[13].setText(prefs.getString("dimanche2",null));
+
+        */
 
         if(menus[0]==null) {
             mDatabase.getReference().child("users").child(pseudo).child("regime").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -190,7 +161,7 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
                                 prefs.edit().putString("Recette", menuName).apply();
                                 Toast.makeText(getApplicationContext(), "Chargement recette", Toast.LENGTH_LONG).show();
 
-                                Intent i = new Intent(menuSemaine.this, recette.class);
+                                Intent i = new Intent(coursesSemaine.this, recette.class);
                                 startActivity(i);
                                 NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                                 finish();
@@ -214,17 +185,17 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
         int id = item.getItemId();
 
         if (id == R.id.nav_accueil) {
-            Intent i = new Intent(menuSemaine.this, Acceuil.class);
+            Intent i = new Intent(coursesSemaine.this, Acceuil.class);
             startActivity(i);
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             finish();
 
         } else if (id == R.id.nav_menu_semaine) {
-            Intent i = new Intent(menuSemaine.this, menuSemaine.class);
+            Intent i = new Intent(coursesSemaine.this, coursesSemaine.class);
             startActivity(i);
             finish();
         } else if (id == R.id.nav_profil) {
-            Intent i = new Intent(menuSemaine.this, mon_profil.class);
+            Intent i = new Intent(coursesSemaine.this, mon_profil.class);
             startActivity(i);
             finish();
         } else if (id == R.id.nav_deco) {
@@ -232,7 +203,7 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
             mAuth.signOut();
             LoginManager.getInstance().logOut();
             finish();
-            Intent i = new Intent(menuSemaine.this, Myfoodadvisor.class);
+            Intent i = new Intent(coursesSemaine.this, Myfoodadvisor.class);
             startActivity(i);
         } else if (id == R.id.nav_proposition) {
             String username = prefs.getString("Pseudo/email", null);
@@ -242,11 +213,11 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
                     if (dataSnapshot.getValue() != null){
                         String autho = dataSnapshot.child("authorisation").getValue().toString();
                         if (autho.equals("oui")){
-                            Intent i = new Intent(menuSemaine.this, proposition.class);
+                            Intent i = new Intent(coursesSemaine.this, proposition.class);
                             startActivity(i);
                             finish();
                         }else if (autho.equals("non")){
-                            Intent i = new Intent(menuSemaine.this, nonauth.class);
+                            Intent i = new Intent(coursesSemaine.this, nonauth.class);
                             startActivity(i);
                             finish();
                         }
@@ -260,15 +231,12 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
             });
         }
         else if (id == R.id.nav_map) {
-            Intent i = new Intent(menuSemaine.this, MapsActivityCurrentPlace.class);
+            Intent i = new Intent(coursesSemaine.this, MapsActivityCurrentPlace.class);
             startActivity(i);
             finish();
         }
-        else if (id == R.id.nav_courses) {
-            Intent i = new Intent(menuSemaine.this, menuSemaine.class);
-            startActivity(i);
-            finish();
-        }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
