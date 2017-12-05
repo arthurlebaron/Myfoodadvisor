@@ -436,10 +436,10 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         Log.d("D","alarmMethod");
     }
 
-    private void affiche_image (String nom, String image){
+    private void affiche_image (String nom, ImageView image){
         switch (nom){
             case "boeuf bourgignon":
-                Picasso.with(getBaseContext()).load(R.drawable.boeuf_bourgignon).transform(new CropSquareTransformation()).into(imagemidi);
+                Picasso.with(getBaseContext()).load(R.drawable.boeuf_bourgignon).transform(new CropSquareTransformation()).into(image);
                 break;
             case "boudin noir aux pommes":
         }
