@@ -196,7 +196,7 @@ public class Myfoodadvisor extends AppCompatActivity {
                             //updateUI(user);
 
                             prefs.edit().putString("Pseudo/email", username).apply();
-
+                            prefs.edit().putString("facebook", "0").apply();
                             Intent i = new Intent(Myfoodadvisor.this, Acceuil.class);
                             startActivity(i);
                         } else {

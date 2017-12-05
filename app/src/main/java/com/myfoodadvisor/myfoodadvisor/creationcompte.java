@@ -277,7 +277,7 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
                                         });
 
                                         prefs.edit().putString("Pseudo/email", mail).apply();
-
+                                        prefs.edit().putString("facebook", "0").apply();
                                         Intent i = new Intent(creationcompte.this, Acceuil.class);
                                         startActivity(i);
                                         finish();
