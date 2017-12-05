@@ -95,7 +95,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(refimg).transform(new CropSquareTransformation()).into(imagemidi);
+                                affiche_image(prefs.getString("lundi",null),imagemidi);
                             }
                         }
                         @Override
@@ -108,8 +108,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepasoir.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagesoir);
-                            }
+                                affiche_image(prefs.getString("lundi2",null),imagesoir);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -129,12 +128,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             Log.d("DEV",dataSnapshot.toString());
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText("cuisson: " + dataSnapshot.child("temps_cui").getValue().toString() + " min");
-                                //temps_prep:
-                                String img = prefs.getString("mardi", null).replaceAll(" ","_");
-                                String refimg;
-                                refimg="R.drawable."+img;
-
-                                Picasso.with(getBaseContext()).load(refimg).transform(new CropSquareTransformation()).into(imagemidi);                            }
+                                affiche_image(prefs.getString("mardi",null),imagemidi);                         }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -145,9 +139,8 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() != null){
                                 tpsprepasoir.setText("cuisson: " + dataSnapshot.child("temps_cui").getValue().toString() + " min");
-                                //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagesoir);
-                            }
+                                affiche_image(prefs.getString("mardi2",null),imagesoir);
+                                 }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -167,8 +160,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
-                            }
+                                affiche_image(prefs.getString("mercredi",null),imagemidi);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -180,8 +172,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepasoir.setText(dataSnapshot.child("temps_cui").getValue().toString()  + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagesoir);
-                            }
+                                affiche_image(prefs.getString("mercredi2",null),imagesoir);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -201,8 +192,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
-                            }
+                                affiche_image(prefs.getString("jeudi",null),imagemidi);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -214,8 +204,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepasoir.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagesoir);
-                            }
+                                affiche_image(prefs.getString("jeudi2",null),imagesoir);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -235,8 +224,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
-                            }
+                                affiche_image(prefs.getString("vendredi",null),imagemidi);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -248,8 +236,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepasoir.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagesoir);
-                            }
+                                affiche_image(prefs.getString("vendredi2",null),imagesoir);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -269,8 +256,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
-                            }
+                                affiche_image(prefs.getString("samedi",null),imagemidi);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -282,8 +268,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepasoir.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagesoir);
-                            }
+                                affiche_image(prefs.getString("samedi2",null),imagesoir);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -303,8 +288,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
-                            }
+                                affiche_image(prefs.getString("dimanche",null),imagemidi);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -316,8 +300,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepasoir.setText(dataSnapshot.child("temps_cui").getValue().toString()+ " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagesoir);
-                            }
+                                affiche_image(prefs.getString("dimanche2",null),imagesoir);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -434,6 +417,9 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         calendar.set(Calendar.AM_PM, PAM);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
         Log.d("D","alarmMethod");
+
+        String name="boeuf bourguinon";
+
     }
 
     private void affiche_image (String nom, ImageView image){
@@ -442,6 +428,81 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                 Picasso.with(getBaseContext()).load(R.drawable.boeuf_bourgignon).transform(new CropSquareTransformation()).into(image);
                 break;
             case "boudin noir aux pommes":
+                Picasso.with(getBaseContext()).load(R.drawable.boudin_noir_aux_pommes).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "cassoulet":
+                Picasso.with(getBaseContext()).load(R.drawable.cassoulet).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "boulettes de viande":
+                Picasso.with(getBaseContext()).load(R.drawable.boulettes_de_viande).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "cordon bleu maison":
+                Picasso.with(getBaseContext()).load(R.drawable.cordon_bleu_maison).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "gratin de pates":
+                Picasso.with(getBaseContext()).load(R.drawable.gratin_de_pates).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "kebab":
+                Picasso.with(getBaseContext()).load(R.drawable.kebab).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "mcdo":
+                Picasso.with(getBaseContext()).load(R.drawable.mcdo).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "nems":
+                Picasso.with(getBaseContext()).load(R.drawable.nems).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "nouilles":
+                Picasso.with(getBaseContext()).load(R.drawable.nouilles).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "pates carbonara":
+                Picasso.with(getBaseContext()).load(R.drawable.pates_carbonara).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "pizza":
+                Picasso.with(getBaseContext()).load(R.drawable.pizza).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "poisson blanc riz":
+                Picasso.with(getBaseContext()).load(R.drawable.poisson_blanc_riz).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "poulet frites":
+                Picasso.with(getBaseContext()).load(R.drawable.poulet_frites).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "raclette":
+                Picasso.with(getBaseContext()).load(R.drawable.raclette).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "raviolis vapeur":
+                Picasso.with(getBaseContext()).load(R.drawable.raviolis_vapeur).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "risotto":
+                Picasso.with(getBaseContext()).load(R.drawable.risotto).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "riz dinde":
+                Picasso.with(getBaseContext()).load(R.drawable.riz_dinde).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "salade concombre feta":
+                Picasso.with(getBaseContext()).load(R.drawable.salade_concombre_feta).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "salade de choux":
+                Picasso.with(getBaseContext()).load(R.drawable.salade_de_choux).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "salade quinoa":
+                Picasso.with(getBaseContext()).load(R.drawable.salade_quinoa).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "sandwich club":
+                Picasso.with(getBaseContext()).load(R.drawable.sandwich_club).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "soupe minestrone":
+                Picasso.with(getBaseContext()).load(R.drawable.soupe_minestrone).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "sushi":
+                Picasso.with(getBaseContext()).load(R.drawable.sushi).transform(new CropSquareTransformation()).into(image);
+                break;
+            case "tartiflette":
+                Picasso.with(getBaseContext()).load(R.drawable.tartiflette).transform(new CropSquareTransformation()).into(image);
+                break;
+                default:
+                    Picasso.with(getBaseContext()).load(R.drawable.defaut_img).transform(new CropSquareTransformation()).into(image);
         }
     }
 }
+
+
