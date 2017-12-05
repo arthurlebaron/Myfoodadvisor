@@ -1,9 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-    defaultConfig {
-        multiDexEnabled true
-    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.myfoodadvisor.myfoodadvisor"

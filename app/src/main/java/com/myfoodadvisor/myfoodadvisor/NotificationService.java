@@ -64,7 +64,7 @@ public class NotificationService extends Service {
         Intent intent1 = new Intent(this.getApplicationContext(), Acceuil.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
         if (PAM==0) {
-            String longText="Hey il est " + h + "h, N'oubliez pas de préparer votre luncah..; Et de le déguster!";
+            String longText="Hey il est " + h + "h, N'oubliez pas de préparer votre lunch... Et de le déguster!";
             builder = new NotificationCompat.Builder(this, id)
                     .setSmallIcon(R.drawable.logo)
                     .setContentIntent(pIntent)
