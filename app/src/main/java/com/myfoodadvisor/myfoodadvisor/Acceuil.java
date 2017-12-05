@@ -95,7 +95,11 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
+                                String img = prefs.getString("lundi", null).replaceAll(" ","_");
+                                String refimg;
+                                refimg="R.drawable."+img;
+
+                                Picasso.with(getBaseContext()).load(refimg).transform(new CropSquareTransformation()).into(imagemidi);
                             }
                         }
                         @Override
@@ -126,11 +130,15 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                     mRef.child("recettes").child(prefs.getString("mardi", null)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d("DEV",dataSnapshot.toString());
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText("cuisson: " + dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                Picasso.with(getBaseContext()).load(dataSnapshot.child("url").getValue().toString()).transform(new CropSquareTransformation()).into(imagemidi);
-                            }
+                                String img = prefs.getString("mardi", null).replaceAll(" ","_");
+                                String refimg;
+                                refimg="R.drawable."+img;
+
+                                Picasso.with(getBaseContext()).load(refimg).transform(new CropSquareTransformation()).into(imagemidi);                            }
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -430,5 +438,14 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         calendar.set(Calendar.AM_PM, PAM);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
         Log.d("D","alarmMethod");
+    }
+    
+    private void affiche_image (String nom, String image){
+        switch (nom){
+            case "boeuf bourgignon":
+
+                break;
+            case "boudin noir aux pommes":
+        }
     }
 }
