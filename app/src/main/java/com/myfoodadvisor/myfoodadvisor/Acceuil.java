@@ -95,10 +95,6 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
                             if (dataSnapshot.getValue() != null){
                                 tpsprepamidi.setText(dataSnapshot.child("temps_cui").getValue().toString() + " min");
                                 //temps_prep:
-                                String img = prefs.getString("lundi", null).replaceAll(" ","_");
-                                String refimg;
-                                refimg="R.drawable."+img;
-
                                 Picasso.with(getBaseContext()).load(refimg).transform(new CropSquareTransformation()).into(imagemidi);
                             }
                         }
@@ -439,11 +435,11 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
         Log.d("D","alarmMethod");
     }
-    
+
     private void affiche_image (String nom, String image){
         switch (nom){
             case "boeuf bourgignon":
-
+                Picasso.with(getBaseContext()).load(R.drawable.boeuf_bourgignon).transform(new CropSquareTransformation()).into(imagemidi);
                 break;
             case "boudin noir aux pommes":
         }
