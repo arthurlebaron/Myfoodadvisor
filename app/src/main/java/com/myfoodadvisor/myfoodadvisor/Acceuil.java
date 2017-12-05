@@ -136,7 +136,7 @@ public class Acceuil extends AppCompatActivity implements NavigationView.OnNavig
             finish();
         }
         else if (id == R.id.nav_courses) {
-            Intent i = new Intent(Acceuil.this, menuSemaine.class);
+            Intent i = new Intent(Acceuil.this, coursesSemaine.class);
             startActivity(i);
             finish();
         }

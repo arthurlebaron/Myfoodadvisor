@@ -265,7 +265,7 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
             finish();
         }
         else if (id == R.id.nav_courses) {
-            Intent i = new Intent(menuSemaine.this, menuSemaine.class);
+            Intent i = new Intent(menuSemaine.this, coursesSemaine.class);
             startActivity(i);
             finish();
         }

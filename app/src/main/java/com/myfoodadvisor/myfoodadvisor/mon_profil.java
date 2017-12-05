@@ -268,7 +268,7 @@ public class mon_profil extends AppCompatActivity implements NavigationView.OnNa
             finish();
         }
         else if (id == R.id.nav_courses) {
-            Intent i = new Intent(mon_profil.this, menuSemaine.class);
+            Intent i = new Intent(mon_profil.this, coursesSemaine.class);
             startActivity(i);
             finish();
         }

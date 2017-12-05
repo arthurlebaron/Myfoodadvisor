@@ -41,11 +41,10 @@ public class modificationregime extends Activity implements View.OnClickListener
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
-
-
-
+    private SharedPreferences prefs_bis;
     List<String> menuSemaine = new ArrayList<String>();
     List<String> Recettes = new ArrayList<String>();
+    String jours[] = new String[14];
 
 
     @Override
@@ -69,11 +68,94 @@ public class modificationregime extends Activity implements View.OnClickListener
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference();
+        jours[0]="lundi";
+
+        jours[1]="lundi2";
+        jours[2]="mardi";
+        jours[3]="mardi2";
+        jours[4]="mercredi";
+        jours[5]="mercredi2";
+        jours[6]="jeudi";
+        jours[7]="jeudi2";
+        jours[8]="vendredi";
+        jours[9]="vendredi2";
+        jours[10]="samedi";
+        jours[11]="samedi2";
+        jours[12]="dimanche";
+        jours[13]="dimanche2";
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.item_regime,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Regime.setAdapter(adapter1);
 
+    }
+    int t=0;
+    List<String> tmp = new ArrayList<String>();
+    private void putSharedCourses()
+    {
+        for(t=0;t<=13;t++) {
+            tmp.clear();
+            final int k=t;
+                mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient1").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null) {
+                            tmp.add(dataSnapshot.getValue().toString());
+
+                            mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient2").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue() != null) {
+
+                                        tmp.add(dataSnapshot.getValue().toString());
+                                        mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient3").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.getValue() != null) {
+
+                                                    tmp.add(dataSnapshot.getValue().toString());
+                                                    mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient4").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                                            if (dataSnapshot.getValue() != null) {
+                                                                prefs_bis = getSharedPreferences(jours[k], MODE_PRIVATE);
+                                                                prefs_bis.edit().putString("ingredient1", tmp.get(0)).apply();
+                                                                prefs_bis.edit().putString("ingredient2",  tmp.get(1)).apply();
+                                                                prefs_bis.edit().putString("ingredient3",  tmp.get(2)).apply();
+                                                                prefs_bis.edit().putString("ingredient4", dataSnapshot.getValue().toString()).apply();
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(DatabaseError databaseError) {
+
+                                                        }
+                                                    });
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
     }
 
     @Override
@@ -138,6 +220,7 @@ public class modificationregime extends Activity implements View.OnClickListener
                                                             prefs.edit().putString("samedi2", menuSemaine.get(11)).apply();
                                                             prefs.edit().putString("dimanche", menuSemaine.get(12)).apply();
                                                             prefs.edit().putString("dimanche2", menuSemaine.get(13)).apply();
+                                                            putSharedCourses();
                                                         }
                                                     }
                                                     @Override
@@ -165,3 +248,5 @@ public class modificationregime extends Activity implements View.OnClickListener
         }
     }
 }
+
+

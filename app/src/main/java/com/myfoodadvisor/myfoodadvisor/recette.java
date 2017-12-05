@@ -89,7 +89,6 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if (dataSnapshot != null) {
                                             tps_prep.setText(dataSnapshot.getValue().toString());
-
                                             mDatabase.getReference().child("recettes").child(recette).child("ingredient1").addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -112,53 +111,48 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
                                                                                             ingredient4.setText(dataSnapshot.getValue().toString());
                                                                                         }
                                                                                     }
-
                                                                                     @Override
                                                                                     public void onCancelled(DatabaseError databaseError) {
                                                                                     }
                                                                                 });
                                                                             }
                                                                         }
-
                                                                         @Override
-                                                                        public void onCancelled(DatabaseError databaseError) {
-                                                                        }
+                                                                    public void onCancelled(DatabaseError databaseError) {}
                                                                     });
                                                                 }
                                                             }
-
                                                             @Override
                                                             public void onCancelled(DatabaseError databaseError) {
                                                             }
                                                         });
                                                     }
                                                 }
-
                                                 @Override
                                                 public void onCancelled(DatabaseError databaseError) {
                                                 }
                                             });
                                         }
                                     }
-
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
                                     }
                                 });
                             }
                         }
-
+                        @Override
                         public void onCancelled(DatabaseError databaseError) {
                         }
                     });
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
+
+
 
 
             @Override
@@ -217,7 +211,7 @@ public class recette extends AppCompatActivity implements NavigationView.OnNavig
             finish();
         }
         else if (id == R.id.nav_courses) {
-            Intent i = new Intent(recette.this, menuSemaine.class);
+            Intent i = new Intent(recette.this, coursesSemaine.class);
             startActivity(i);
             finish();
         }

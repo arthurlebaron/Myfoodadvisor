@@ -166,7 +166,7 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
                     finish();
                 }
                 else if (id == R.id.nav_courses) {
-                    Intent i = new Intent(MapsActivityCurrentPlace.this, menuSemaine.class);
+                    Intent i = new Intent(MapsActivityCurrentPlace.this, coursesSemaine.class);
                     startActivity(i);
                     finish();
                 }

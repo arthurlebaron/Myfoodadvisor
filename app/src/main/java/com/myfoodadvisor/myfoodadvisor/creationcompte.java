@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,8 +51,10 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
     private DatabaseReference mRef;
 
     private SharedPreferences prefs;
+    private SharedPreferences prefs_bis;
     List<String> Recettes = new ArrayList<String>();
     List<String> menuSemaine = new ArrayList<String>();
+    String jours[] = new String[14];
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,22 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
         mRef = mDatabase.getReference();
 
         prefs = getSharedPreferences("Utilisateur", MODE_PRIVATE);
+        jours[0]="lundi";
+
+        jours[1]="lundi2";
+        jours[2]="mardi";
+        jours[3]="mardi2";
+        jours[4]="mercredi";
+        jours[5]="mercredi2";
+        jours[6]="jeudi";
+        jours[7]="jeudi2";
+        jours[8]="vendredi";
+        jours[9]="vendredi2";
+        jours[10]="samedi";
+        jours[11]="samedi2";
+        jours[12]="dimanche";
+        jours[13]="dimanche2";
+
 
         ArrayAdapter <CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.item_sexe,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -104,7 +123,73 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-    }*/
+    }*/ int t=0;
+    List<String> tmp = new ArrayList<String>();
+    private void putSharedCourses()
+    {
+        for(t=0;t<=13;t++) {
+            tmp.clear();
+            final int k=t;
+            mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient1").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null) {
+                        tmp.add(dataSnapshot.getValue().toString());
+                        mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient2").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.getValue() != null) {
+
+                                    tmp.add(dataSnapshot.getValue().toString());
+                                    mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient3").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.getValue() != null) {
+
+                                                tmp.add(dataSnapshot.getValue().toString());
+                                                 mRef.child("recettes").child(menuSemaine.get(k)).child("ingredient4").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                        if (dataSnapshot.getValue() != null) {
+                                                            prefs_bis = getSharedPreferences(jours[k], MODE_PRIVATE);
+                                                             prefs_bis.edit().putString("ingredient1", tmp.get(0)).apply();
+                                                            prefs_bis.edit().putString("ingredient2",  tmp.get(1)).apply();
+                                                            prefs_bis.edit().putString("ingredient3",  tmp.get(2)).apply();
+                                                            prefs_bis.edit().putString("ingredient4", dataSnapshot.getValue().toString()).apply();
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
     private void registerUser(final String mail,final String password,final String Age,final String Sexe,final String Taille,final String Poids,final String Lieu,final String Regime, final String authorisation){
         // [START create_user_with_email]
@@ -175,6 +260,8 @@ public class creationcompte extends AppCompatActivity implements View.OnClickLis
 
                                                                 prefs.edit().putString("dimanche", menuSemaine.get(12)).apply();
                                                                 prefs.edit().putString("dimanche2", menuSemaine.get(13)).apply();
+                                                                putSharedCourses();
+
                                                             }
                                                         }
                                                         @Override
