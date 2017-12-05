@@ -264,6 +264,11 @@ public class menuSemaine extends AppCompatActivity implements NavigationView.OnN
             startActivity(i);
             finish();
         }
+        else if (id == R.id.nav_courses) {
+            Intent i = new Intent(menuSemaine.this, coursesSemaine.class);
+            startActivity(i);
+            finish();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

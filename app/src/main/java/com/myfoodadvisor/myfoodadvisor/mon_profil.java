@@ -268,6 +268,11 @@ public class mon_profil extends AppCompatActivity implements NavigationView.OnNa
             startActivity(i);
             finish();
         }
+        else if (id == R.id.nav_courses) {
+            Intent i = new Intent(mon_profil.this, coursesSemaine.class);
+            startActivity(i);
+            finish();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

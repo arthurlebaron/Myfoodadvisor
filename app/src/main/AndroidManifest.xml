@@ -58,6 +58,8 @@
         </activity>
         <activity android:name=".creationfacebook">
         </activity>
+        <activity android:name=".coursesSemaine">
+        </activity>
 
     <activity android:name=".recette">
     </activity>
